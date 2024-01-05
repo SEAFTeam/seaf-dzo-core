@@ -1,6 +1,6 @@
 ## Метаданные пакета
 $package:
-  seaf-dzo: # Идентификатор пакета
+  seaf-dzo-core: # Идентификатор пакета
     # Краткое название пакета
     name: SEAF.DZO
     # Поставщик
@@ -11,7 +11,7 @@ $package:
     version: 1.0.0
     # Зависимости от других пакетов
     dependencies:
-      seaf: ">=1.0.0"
+      seaf-core: ">=1.0.0"
 docs:
   dochub.welcome.ta_timeline2024Q1:
     title: SEAF TA Roadmap 2024Q1
