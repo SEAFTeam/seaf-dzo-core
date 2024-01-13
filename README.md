@@ -1,5 +1,5 @@
 # SEAF.DZO
-Архитектурный фреймворк ДЗО Группы Сбер, базирующийся на [SEAF (Sber Enterprise Architect Framefork)](../seaf-core/README.md).
+Архитектурный фреймворк ДЗО Группы Сбер, базирующийся на [SEAF (Sber Enterprise Architect Framefork)](https://github.com/SEAFTeam/seaf-core).
 
 Фреймворк адаптирует SEAF для использования в Группе, расширяя его поставку 
 необходимым инструментарием и методологией для ДЗО. Обеспечивает однородность архитектурной
