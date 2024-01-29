@@ -3,20 +3,82 @@ entities:
   components:
     schema:
       $defs:
-        seaf.app.sber.profile:
-          title: Базовое описание компонента
+        seaf.app.sber.properties.ownership:
+          title: Атрибуты модели владения
           type: object
           properties:
-            id:
-              title: Уникальный идентификатор компонента
-              type: string
-              format: uuid
-          required:
-            - id
-        seaf.app.sber.service:
-          title: Описание автоматизированной системы (АС)
+            location:
+              title: Размещение
+              enum:
+                - Внутренняя
+                - Внешняя
+            ownership:
+              title: Степень владения
+              enum:
+                - Владеем исходным кодом
+                - Владеем экземпляром
+                - SaaS
+                - Система партнера
+
+        seaf.app.sber.properties.livestage:
+          title: Атрибуты управления жизненным циклом
           type: object
-          $ref: "#/$defs/seaf.app.sber.profile"
+          properties:
+            live_stage:
+              title: Этап жизненного цикла
+              enum:
+                - Эскиз
+                - В разработке / приобретение
+                - Внедрение / Не введена в эксплуатацию
+                - Опытная эксплуатация
+                - Промышленная эксплуатация
+                - Архивная
+            live_stage_target:
+              title: Этап жизненного цикла на горизонт планирования
+              enum:
+                - Эскиз
+                - В разработке / приобретение
+                - Внедрение / Не введена в эксплуатацию
+                - Опытная эксплуатация
+                - Промышленная эксплуатация
+                - Архивная
+            target_status:
+              title: Целевой статус (решение принято)
+              enum:
+                - Целевая
+                - Не целевая
+            change_type:
+              title: Тип изменений
+              enum:
+                - Планируется
+                - Разрабатывается
+                - Модифицируется
+                - Используется
+                - Выводится из эксплуатации
+            changes:
+              title: Описание изменений
+              type: string
+
+        seaf.app.sber.performance:
+          title: Параметры производительности и надежности
+          type: object
+          properties:
+            performance:
+              title: Производительность
+              type: string
+            rto:
+              title: RTO (мин)
+              type: integer
+            rpo:
+              title: RPO (мин)
+              type: integer
+            sla:
+              title: SLA (%)
+              type: number
+
+        seaf.app.sber.class:
+          title: Класс автоматизированной системы / прикладного сервиса
+          type: object
           properties:
             class:
               title: Класс
@@ -68,6 +130,13 @@ entities:
                 - Системы генерации документов
                 - Телефония
                 - Иное
+          required:
+            - class
+
+        seaf.app.sber.role_model:
+          title: Атрибуты ролевой модели
+          type: object
+          properties:
             role_model:
               title: Ролевая модель автоматизированной системы
               type: string
@@ -75,6 +144,13 @@ entities:
                 - Централизованная
                 - Нецентрализованная
                 - Отсутствует
+          required:
+            - role_model
+
+        seaf.app.sber.criticality:
+          title: Атрибуты оценки критичности
+          type: object
+          properties:
             criticality:
               title: Уровень критичности
               enum:
@@ -82,71 +158,42 @@ entities:
                 - Business Critical
                 - Business Operational
                 - Office Productivity
-            performance:
-              title: Производительность
-              type: string
-            location:
-              title: Размещение
-              enum:
-                - Внутренняя
-                - Внешняя
-            ownership:
-              title: Степень владения
-              enum:
-                - Владеем исходным кодом
-                - Владеем экземпляром
-                - SaaS
-                - Система партнера
-            live_stage:
-              title: Этап жизненного цикла
-              enum:
-                - Эскиз
-                - В разработке / приобретение
-                - Внедрение / Не введена в эксплуатацию
-                - Опытная эксплуатация
-                - Промышленная эксплуатация
-                - Архивная
-            live_stage_target:
-              title: Этап жизненного цикла на горизонт планирования
-              enum:
-                - Эскиз
-                - В разработке / приобретение
-                - Внедрение / Не введена в эксплуатацию
-                - Опытная эксплуатация
-                - Промышленная эксплуатация
-                - Архивная
-            target_status:
-              title: Целевой статус (решение принято)
-              enum:
-                - Целевая
-                - Не целевая
-            change_type:
-              title: Тип изменений
-              enum:
-                - Планируется
-                - Разрабатывается
-                - Модифицируется
-                - Используется
-                - Выводится из эксплуатации
-            rto:
-              title: RTO (мин)
-              type: integer
-            rpo:
-              title: RPO (мин)
-              type: integer
-            sla:
-              title: SLA (%)
-              type: number
-            changes:
-              title: Описание изменений
-              type: string
+          required:
+            - criticality
+
+        seaf.app.sber.comments:
+          title: Комментарии, риски, проблемы
+          type: object
+          properties:
             comments:
               title: Комментарии, риски, проблемы
               type: string
+
+        seaf.app.sber.profile:
+          title: Базовое описание компонента
+          type: object
+          properties:
+            id:
+              title: Уникальный идентификатор компонента
+              type: string
+              format: uuid
           required:
-            - class
-            - role_model
-            - criticality
+            - id
+
+        seaf.app.sber.service:
+          title: Описание автоматизированной системы (АС)
+          type: object
+          allOf:
+            - $ref: "#/$defs/seaf.app.sber.profile"
+            - $ref: "#/$defs/seaf.app.sber.properties.livestage"
+            - $ref: "#/$defs/seaf.app.sber.properties.ownership"
+            - $ref: "#/$defs/seaf.app.sber.performance"
+            - $ref: "#/$defs/seaf.app.sber.class"
+            - $ref: "#/$defs/seaf.app.sber.role_model"
+            - $ref: "#/$defs/seaf.app.sber.criticality"
+            - $ref: "#/$defs/seaf.app.sber.comments"
+
+
         seaf.app.sber.app_component:
           title: Описание автоматизированной системы (АС)
           $ref: "#/$defs/seaf.app.sber.profile"
