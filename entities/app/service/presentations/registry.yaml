@@ -13,6 +13,7 @@ docs:
       - value: description
         text: Описание
         align: left
+    origin: seaf.app.services
     source: >
       (
          [$."seaf.app.services".$spread().{
