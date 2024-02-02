@@ -1,0 +1,24 @@
+docs:
+  seaf.app.services.registry:
+    location: "/Архитектура/Прикладная/Сервисы"
+    type: table
+    headers:
+      - value: id
+        text: Идентификатор
+        link: link
+      - value: title
+        text: Наименование
+        align: left
+        link: link
+      - value: description
+        text: Описание
+        align: left
+    source: >
+      (
+         [$."seaf.app.services".$spread().{
+              "id": $keys()[0],
+              "link": "/entities/seaf.app.services/blank?seaf-app-service-id=" & $keys()[0],
+              "title": *.title,
+              "description": *.description
+          }]
+      )
