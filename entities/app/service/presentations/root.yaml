@@ -1,0 +1,4 @@
+imports:
+  - blank.yaml
+  - registry.yaml
+  - summary.yaml
