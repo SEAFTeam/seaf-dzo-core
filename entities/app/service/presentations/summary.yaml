@@ -13,6 +13,7 @@ entities:
             - seaf-app-service-id
         type: markdown
         template: templates/summary.md
+        origin: seaf.app.services
         source: >
           (
               $service_id := $params."seaf-app-service-id";

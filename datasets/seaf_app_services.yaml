@@ -1,0 +1,8 @@
+datasets:
+  seaf.app.services:
+    source: >
+      (
+          {
+              "seaf.app.services": $merge([$.components.$spread()[*.sber.type="service"].({$.$keys() : $merge([$.*, $.*.sber])}), $."seaf.app.services"])
+          }
+      )
