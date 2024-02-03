@@ -2,3 +2,4 @@ imports:
   - blank.yaml
   - registry.yaml
   - summary.yaml
+  - components.yaml

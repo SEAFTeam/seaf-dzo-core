@@ -20,6 +20,14 @@ entities:
             style:
               margin: 4px
               border: true
+          components:
+            title: Состоит из компонент
+            presentation: components
+            align: ">"
+            order: 10
+            style:
+              margin: 4px
+              border: true
         type: mkr-grid
         source: >
           (

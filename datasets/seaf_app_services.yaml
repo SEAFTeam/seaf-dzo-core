@@ -2,7 +2,33 @@ datasets:
   seaf.app.services:
     source: >
       (
-          {
-              "seaf.app.services": $merge([$.components.$spread()[*.sber.type="service"].({$.$keys() : $merge([$.*, $.*.sber])}), $."seaf.app.services"])
-          }
+          $services := $merge(
+                              [                                
+                               $.components.$spread()[*.sber.type="service"].(
+                                  {
+                                      $.$keys() : $merge([$.*, $.*.sber])
+                                  }),
+                               $."seaf.app.services"
+                              ]);
+          $ ~> | $ | $merge([ $, { "seaf.app.services": $services } ]) |;
+      )
+
+  seaf.app.services.full:
+    origin: seaf.app.services
+    source: >
+      (
+          $services := $."seaf.app.services";
+      
+          $components := $.components.$spread()[*.sber.type="component"];
+      
+          $result := $map($components, function($v) {(
+                  $service := $v.*.sber.is_component_of;
+                  $result := { $service : { "components" : $v }};
+
+                )}
+            );
+          $appendToServices := function($v, $to) { $services := $mergedeep([$to, $v]) };
+          $services := $reduce($result, $appendToServices, $services);
+      
+          { "seaf.app.services": $services };
       )
