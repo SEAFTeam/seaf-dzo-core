@@ -19,10 +19,10 @@ entities:
               $service_id := $params."seaf-app-service-id";
               $ctx := $;
               $lookup($ctx."seaf.app.services", $service_id).(
-                  $data := [$.components.{
+                  $data := [$.components.$spread().({
                       "content": $.*.title,
                       "link": "(/entities/components/blank?dh-component-id=" & $.$keys() & ")"
-                  }];
+                  })];
                   {
                     "title": "Компоненты",
                     "data" : $data
