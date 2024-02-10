@@ -19,3 +19,13 @@ entities:
             description:
               title: Описание прикладного сервиса
               type: string
+            requirements:
+              title: Требования
+              type: array
+              items:
+                $ref: "#/$rels/seaf.change.requirements.requirement"
+            aspects:
+              title: Функциональность
+              type: array
+              items:
+                $ref: "#/$rels/aspects.aspect"
