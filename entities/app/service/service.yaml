@@ -1,5 +1,7 @@
 entities:
   seaf.app.services:
+    title: Прикладной сервис
+    description: Прикладной сервис
     objects:
       app.service:
         route: "/"
