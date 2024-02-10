@@ -1,5 +1,9 @@
 entities:
   seaf.app.services:
+    objects:
+      app.service:
+        route: "/"
+        title: Прикладной сервис
     schema:
       patternProperties:
         "^[a-zA-Z][a-zA-Z0-9_-]*(\\.[a-zA-Z0-9][a-zA-Z0-9_-]*)*$":
