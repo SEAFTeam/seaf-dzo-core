@@ -30,5 +30,5 @@ datasets:
           $appendToServices := function($v, $to) { $services := $mergedeep([$to, $v]) };
           $services := $merge([$services, $reduce($result, $appendToServices, $services)]);
       
-          { "seaf.app.services": $services };
+          $ ~> | $ | $merge([ $, { "seaf.app.services": $services } ]) |;
       )
