@@ -4,7 +4,7 @@ datasets:
       (
           $services := $merge(
                               [                                
-                               $.components.$spread()[*.sber.type="service"].(
+                               $.components.$spread()[*.type="service"].(
                                   {
                                       $.$keys() : $merge([$.*, $.*.sber])
                                   }),
@@ -19,7 +19,7 @@ datasets:
       (
           $services := $."seaf.app.services";
       
-          $components := $.components.$spread()[*.sber.type="component"];
+          $components := $.components.$spread()[*.type="component"];
       
           $result := $map($components, function($v) {(
                   $service := $v.*.sber.is_component_of;
