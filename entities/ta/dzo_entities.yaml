@@ -86,9 +86,6 @@ entities:
             deployment_id:
               title: K8s Deployment ID
               type: string
-            name:
-              title: Имя компонента
-              type: string
             update_strategy:
               title: Стратегия обновления
               type: string
@@ -112,7 +109,6 @@ entities:
               $ref: "#/$rels/seaf.ta.services.dc_az.dc_az"
           required:
             - deployment_id
-            - name
             - update_strategy
             - replicas
             - maxunavailable
@@ -135,9 +131,6 @@ entities:
           properties:
             pod_k8s_id:
               title: POD K8s ID
-              type: string
-            name:
-              title: Имя POD
               type: string
             priorityclass:
               title: priorityClass
@@ -183,7 +176,6 @@ entities:
                 $ref: "#/$rels/seaf.ta.components.k8s_deployment.k8s_deployment"
           required:
             - pod_k8s_id
-            - name
             - update_strategy
             - stoptimeout
             - pv
@@ -210,9 +202,6 @@ entities:
           properties:
             container_id:
               title: Container K8s ID
-              type: string
-            name:
-              title: Имя контейнера
               type: string
             container_type:
               title: Тип контейнера
@@ -270,7 +259,6 @@ entities:
                 $ref: "#/$rels/seaf.ta.components.server.server"
           required:
             - container_id
-            - name
 
   seaf.ta.components.k8s_image:
     title: Image ПО для развёртывания в K8s
