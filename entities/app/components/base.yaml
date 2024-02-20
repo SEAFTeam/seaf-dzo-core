@@ -177,127 +177,133 @@ entities:
               title: Уникальный идентификатор компонента
               type: string
               format: uuid
-          required:
-            - id
+#          required:
+#            - id
 
         seaf.app.sber.service:
           title: Описание автоматизированной системы (АС)
           type: object
-          allOf:
-            - $ref: "#/$defs/seaf.app.sber.profile"
-            - $ref: "#/$defs/seaf.app.sber.properties.livestage"
-            - $ref: "#/$defs/seaf.app.sber.properties.ownership"
-            - $ref: "#/$defs/seaf.app.sber.performance"
-            - $ref: "#/$defs/seaf.app.sber.class"
-            - $ref: "#/$defs/seaf.app.sber.role_model"
-            - $ref: "#/$defs/seaf.app.sber.criticality"
-            - $ref: "#/$defs/seaf.app.sber.comments"
-
+          properties:
+            sber:
+              type: object
+              additionalProperties: false
+              allOf:
+                - $ref: "#/$defs/seaf.app.sber.profile"
+                - $ref: "#/$defs/seaf.app.sber.properties.livestage"
+                - $ref: "#/$defs/seaf.app.sber.properties.ownership"
+                - $ref: "#/$defs/seaf.app.sber.performance"
+                - $ref: "#/$defs/seaf.app.sber.class"
+                - $ref: "#/$defs/seaf.app.sber.role_model"
+                - $ref: "#/$defs/seaf.app.sber.criticality"
+                - $ref: "#/$defs/seaf.app.sber.comments"
 
         seaf.app.sber.app_component:
           title: Описание автоматизированной системы (АС)
           $ref: "#/$defs/seaf.app.sber.profile"
           properties:
-            is_component_of:
-              title: Указание прикладного сервиса, в рамках которого проектируется или уже создан компонент
-              oneOf:
-                - $ref: "#/$rels/components.component"
-                - $ref: "#/$rels/seaf.app.services.app.service"
-            component_type:
-              title: Тип прикладного компонента
-              type: string
-              enum:
-                - Реляционная СУБД
-                - NOSQL СУБД
-                - Иная СУБД
-                - Распределенный (Distributed) Кэш
-                - Сервер Приложений
-                - Web Сервер
-                - Микросервис
-                - Функция/Serverless
-                - Консольное приложение
-                - Скрипт
-                - Фронт (веб приложение)
-                - Фронт (мобильное приложение)
-                - Фронт (десктоп приложение)
-                - Шлюз
-                - Балансировщик
-                - Интеграционный компонент
-                - ETL
-                - Файловый ресурс
-                - Иное
-            scalability:
-              title: Масштабируемость
-              enum:
-                - Нет
-                - Вертикальная
-                - Горизонтальная
-                - Вертикальная и горизонтальная
-            provider:
-              title: Разработчик
-              type: string
-            provider_type:
-              title: Тип разработчика компонента
-              type: string
-              enum:
-                - Собственная разработка
-                - Локальный разработчик
-                - Внешний(Иностранный)
-                - Open Source Community
-            stores_confidential_data:
-              title: Компонент хранит конфиденциальные данные?
-              type: boolean
-            cloud_readiness:
-              title: Уровень облачной зрелости
-              type: string
-              enum:
-                - Монолит на нестандартном аппаратном обеспечении (No Cloud-2)
-                - Монолит на стандартном аппаратном обеспечении (No Cloud-1)
-                - Монолит на виртуализированном аппаратном обеспечении (Cloud Ready 1)
-                - Компоненты в контейнерах на виртуализированном аппаратном обеспечении (Cloud ready 2)
-                - Компоненты в развёрнутом на виртуализированном аппаратном обеспечении оркестраторе контейнеров (Cloud ready 3)
-                - Компоненты в частном облаке с управляемым облачным поставщиком программным обеспечением среды исполнения контейнеров (Cloud Native 4)
-                - Компоненты в гибридном публичном облаке/наборе облаков с управляемыми облачными поставщиками инфраструктурными сервисами (Cloud Native 5)
-                - Бессерверные (serverless) облачные приложения  в публичном облаке/наборе облаков (Cloud Native 6) ]
-            licenses_ids:
-              title: Идентификаторы объектов-лицензий для компонента
-              type: array
-              minItems: 0
-              items:
-                type: string
-            included_in_regulator_registry:
-              title: Компонент включен в реестр регулятора?
-              type: boolean
-            located_in_DMZ:
-              title: Компонент размещен в DMZ?
-              type: boolean
-            access_from_external_networks:
-              title: Есть доступ к ресурсам данного компонента из внешних сетей ?
-              type: boolean
-            escrow:
-              title: Автоматизированная система включена в договор эскроу с вендором?
-              type: boolean
-            performance:
-              title: Производительность
-              type: string
-            changes:
-              title: Описание изменений
-              type: string
-            comments:
-              title: Комментарии, риски, проблемы
-              type: string
-
-          required:
-            - component_type
-            - scalability
-            - stores_confidential_data
-            - provider
-            - provider_type
-            - is_component_of
-        seaf.app.sber.component:
-          anyOf:
-            - $ref: "#/$defs/seaf.app.sber.app_component"
+            sber:
+              type: object
               additionalProperties: false
+              properties:
+                is_component_of:
+                  title: Указание прикладного сервиса, в рамках которого проектируется или уже создан компонент
+                  oneOf:
+                    - $ref: "#/$rels/components.component"
+                    - $ref: "#/$rels/seaf.app.services.app.service"
+                component_type:
+                  title: Тип прикладного компонента
+                  type: string
+                  enum:
+                    - Реляционная СУБД
+                    - NOSQL СУБД
+                    - Иная СУБД
+                    - Распределенный (Distributed) Кэш
+                    - Сервер Приложений
+                    - Web Сервер
+                    - Микросервис
+                    - Функция/Serverless
+                    - Консольное приложение
+                    - Скрипт
+                    - Фронт (веб приложение)
+                    - Фронт (мобильное приложение)
+                    - Фронт (десктоп приложение)
+                    - Шлюз
+                    - Балансировщик
+                    - Интеграционный компонент
+                    - ETL
+                    - Файловый ресурс
+                    - Иное
+                scalability:
+                  title: Масштабируемость
+                  enum:
+                    - Нет
+                    - Вертикальная
+                    - Горизонтальная
+                    - Вертикальная и горизонтальная
+                provider:
+                  title: Разработчик
+                  type: string
+                provider_type:
+                  title: Тип разработчика компонента
+                  type: string
+                  enum:
+                    - Собственная разработка
+                    - Локальный разработчик
+                    - Внешний(Иностранный)
+                    - Open Source Community
+                stores_confidential_data:
+                  title: Компонент хранит конфиденциальные данные?
+                  type: boolean
+                cloud_readiness:
+                  title: Уровень облачной зрелости
+                  type: string
+                  enum:
+                    - Монолит на нестандартном аппаратном обеспечении (No Cloud-2)
+                    - Монолит на стандартном аппаратном обеспечении (No Cloud-1)
+                    - Монолит на виртуализированном аппаратном обеспечении (Cloud Ready 1)
+                    - Компоненты в контейнерах на виртуализированном аппаратном обеспечении (Cloud ready 2)
+                    - Компоненты в развёрнутом на виртуализированном аппаратном обеспечении оркестраторе контейнеров (Cloud ready 3)
+                    - Компоненты в частном облаке с управляемым облачным поставщиком программным обеспечением среды исполнения контейнеров (Cloud Native 4)
+                    - Компоненты в гибридном публичном облаке/наборе облаков с управляемыми облачными поставщиками инфраструктурными сервисами (Cloud Native 5)
+                    - Бессерверные (serverless) облачные приложения  в публичном облаке/наборе облаков (Cloud Native 6) ]
+                licenses_ids:
+                  title: Идентификаторы объектов-лицензий для компонента
+                  type: array
+                  minItems: 0
+                  items:
+                    type: string
+                included_in_regulator_registry:
+                  title: Компонент включен в реестр регулятора?
+                  type: boolean
+                located_in_DMZ:
+                  title: Компонент размещен в DMZ?
+                  type: boolean
+                access_from_external_networks:
+                  title: Есть доступ к ресурсам данного компонента из внешних сетей ?
+                  type: boolean
+                escrow:
+                  title: Автоматизированная система включена в договор эскроу с вендором?
+                  type: boolean
+                performance:
+                  title: Производительность
+                  type: string
+                changes:
+                  title: Описание изменений
+                  type: string
+                comments:
+                  title: Комментарии, риски, проблемы
+                  type: string
+
+              required:
+                - component_type
+                - scalability
+                - stores_confidential_data
+                - provider
+                - provider_type
+                - is_component_of
+        seaf.app.sber.component:
+          oneOf:
+            - $ref: "#/$defs/seaf.app.sber.app_component"
               properties:
                 type:
                   type: string
@@ -306,7 +312,6 @@ entities:
               required:
                 - type
             - $ref: "#/$defs/seaf.app.sber.service"
-              additionalProperties: false
               properties:
                 type:
                   type: string
@@ -317,7 +322,5 @@ entities:
       patternProperties:
         "^[a-zA-Z][a-zA-Z0-9_-]*(\\.[a-zA-Z0-9][a-zA-Z0-9_-]*)*$":
           type: object
-          properties:
-            sber:
-              $ref: "#/$defs/seaf.app.sber.component"
+          $ref: "#/$defs/seaf.app.sber.component"
 
