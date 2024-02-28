@@ -1,3 +1,4 @@
 imports:
   - parties/parties.yaml
   - products/products.yaml
+  - processes/processes.yaml
