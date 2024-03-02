@@ -8,7 +8,7 @@ $package:
     # Описание
     description: Sber Enterprise Architect Framework for DZO
     # Версия
-    version: 1.2.7
+    version: 1.2.8
     # Зависимости от других пакетов
     dependencies:
       seaf-core: ">=1.2.3"
