@@ -160,11 +160,6 @@ entities:
             ml:
               title: Используется для машинного обучения
               type: boolean
-            kubernetes_id:
-              title: Kubernetes cluster ID
-              type: array
-              items:
-                $ref: "#/$rels/seaf.ta.services.k8s.k8s"
             deployment_id:
               title: В каких деплойментах задействован
               type: array
@@ -180,7 +175,7 @@ entities:
             - scheduled
             - secrets
             - access_level
-            - kubernetes_id
+            - deployment_id
 
   seaf.ta.components.k8s_container:
     title: K8s Container
