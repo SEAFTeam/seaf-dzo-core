@@ -40,8 +40,7 @@ entities:
             class:
               title: Класс систем
               enum:
-                - Логгирование
-                - Мониторинг
+                - Контейнеризация
             location:
               title: Размещение
               enum:
@@ -143,7 +142,7 @@ entities:
               title: Период остановки POD в секундах
               type: integer
             pv:
-              title: Используется PV/PVC
+              title: Используется Persistent Volume/Persistent Volume Claim
               type: boolean
             access_level:
               title: Требуемый уровень доступа
@@ -152,9 +151,6 @@ entities:
             secrets:
               title: Механизм хранения секретов
               type: string
-            replicas:
-              title: Количество реплик
-              type: integer
             scheduled:
               title: Периодически запускаемый
               type: boolean
@@ -164,11 +160,6 @@ entities:
             ml:
               title: Используется для машинного обучения
               type: boolean
-            kubernetes_id:
-              title: Kubernetes cluster ID
-              type: array
-              items:
-                $ref: "#/$rels/seaf.ta.services.k8s.k8s"
             deployment_id:
               title: В каких деплойментах задействован
               type: array
@@ -182,10 +173,9 @@ entities:
             - ml
             - tmp_storage
             - scheduled
-            - replicas
             - secrets
             - access_level
-            - kubernetes_id
+            - deployment_id
 
   seaf.ta.components.k8s_container:
     title: K8s Container
@@ -467,35 +457,8 @@ entities:
             class:
               title: Класс систем
               enum:
-                - Архитектурный репозиторий
-                - Бекапирование и восстановление данных
-                - Виртуализация
-                - Контейнеризация
                 - Логгирование
                 - Мониторинг
-                - Удаленный доступ
-                - Управление конфигурациями
-                - Управление облачной инфраструктурой
-                - BigData
-                - CDC (Change Data Capture)
-                - DWH (Хранилище данных)
-                - ETL
-                - FTP/SFTP/FTPS серверы
-                - MDM (Master Data Management)
-                - Message Queue
-                - NoSQL СУБД
-                - OLAP & BI
-                - Proxy-серверы
-                - Web-серверы
-                - Балансировка нагрузки (load balancers)
-                - Интеграционная шина
-                - Каналы обслуживания клиентов (фронтальные решения)
-                - Проверка и очистка данных
-                - Распределенный кэш
-                - Реляционные СУБД
-                - Серверы приложений (Application Servers)
-                - Файловое хранилище
-                - Иное
             location:
               title: Размещение
               enum:

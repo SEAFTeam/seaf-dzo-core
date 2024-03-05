@@ -1,0 +1,21 @@
+entities:
+  seaf.ba.processes:
+    schema:
+      patternProperties:
+        "[a-zA-Z0-9_]*(\\.[a-zA-Z0-9_]*)*$":
+          properties:
+            systems:
+              title: Системы, обеспечивающие бизнес-процесс
+              type: array
+              items:
+                $ref: "#/$rels/components.component"
+            integrations:
+              title: Связь с интеграционными потоками
+              type: array
+              items:
+                $ref: "#/$rels/seaf.app.integrations.integrations"
+            comments:
+              title: Комментарии, риски, проблемы
+              type: array
+              items:
+                type: string
