@@ -152,9 +152,6 @@ entities:
             secrets:
               title: Механизм хранения секретов
               type: string
-            replicas:
-              title: Количество реплик
-              type: integer
             scheduled:
               title: Периодически запускаемый
               type: boolean
@@ -182,7 +179,6 @@ entities:
             - ml
             - tmp_storage
             - scheduled
-            - replicas
             - secrets
             - access_level
             - kubernetes_id
