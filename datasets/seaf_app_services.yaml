@@ -1,6 +1,0 @@
-datasets:
-  seaf.app.services:
-    source: >
-      (
-          $ ~> | $ | $merge([ $, { "seaf.app.services": $merge($.components.$spread()[*.type="service"] )} ]) |;
-      )
