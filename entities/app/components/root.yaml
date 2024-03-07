@@ -1,3 +1,4 @@
 imports:
   - base.yaml
   - dzo_summary.yaml
+  - service_registry.yaml
