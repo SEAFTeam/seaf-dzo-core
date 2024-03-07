@@ -3,7 +3,7 @@ entities:
     schema:
       $defs:
         seaf.ta.services.k8s_dzo:
-          title: Расширение описание кластера K8s для целей проверки станадртов
+          title: Расширение описание кластера K8s для ДЗО
           type: object
           properties:
             #Часть 3. TACIR_1-КП-КО-3-01. Платформа контейнерной оркестрации должна иметь в резервных зонах доступности кластер/кластеры обеспечивающие 100% производительности платформы при потере основной зоны.
@@ -100,9 +100,16 @@ entities:
               type: array
               items:
                 $ref: "#/$rels/seaf.ta.services.k8s.k8s"
-            description:
-              title: Описание использования
-              type: string
+            k8s_pod:
+              title: Pod IDs
+              type: array
+              items:
+                $ref: "#/$rels/seaf.ta.components.k8s_pod.k8s_pod"
+            container_id:
+              title: Какие контейнеры включает
+              type: array
+              items:
+                $ref: "#/$rels/seaf.ta.components.k8s_container.k8s_container"
             availabilityzone_id:
               title: В какие зоны доступности входит DC
               $ref: "#/$rels/seaf.ta.services.dc_az.dc_az"
@@ -112,7 +119,61 @@ entities:
             - replicas
             - maxunavailable
             - kubernetes_id
-            - description
+            - availabilityzone_id
+
+  seaf.ta.components.k8s_statefulset:
+    title: K8s StatefulSet
+    objects:
+      k8s_statefulset:
+        route: "/"
+        title: K8s StatefulSet
+    schema: # JSON Schema контролирующая описание объекта сущности
+      type: object
+      patternProperties:
+        "[a-zA-Z0-9_\\.]*":
+          type: object
+          $ref: "#/$defs/seaf.ta.components.base.entity"
+          properties:
+            statefulset_id:
+              title: K8s StatefulSet ID
+              type: string
+            name:
+              title: Имя StatefulSet
+              type: string
+            update_strategy:
+              title: Стратегия обновления
+              type: string
+              enum: [RollingUpdate, OnDelete]
+            replicas:
+              title: Количество реплик
+              type: integer
+            maxunavailable:
+              title: Какое минимальное количество экземпляров должно работать во время обновления обслуживающих текущие запросы
+              type: integer
+            kubernetes_id:
+              title: Kubernetes cluster ID
+              type: array
+              items:
+                $ref: "#/$rels/seaf.ta.services.k8s.k8s"
+            k8s_pod:
+              title: Pod IDs
+              type: array
+              items:
+                $ref: "#/$rels/seaf.ta.components.k8s_pod.k8s_pod"
+            container_id:
+              title: Какие контейнеры включает
+              type: array
+              items:
+                $ref: "#/$rels/seaf.ta.components.k8s_container.k8s_container"
+            availabilityzone_id:
+              title: В какие зоны доступности входит DC
+              $ref: "#/$rels/seaf.ta.services.dc_az.dc_az"
+          required:
+            - statefulset_id
+            - update_strategy
+            - replicas
+            - maxunavailable
+            - kubernetes_id
             - availabilityzone_id
 
   seaf.ta.components.k8s_pod:
@@ -130,6 +191,9 @@ entities:
           properties:
             pod_k8s_id:
               title: POD K8s ID
+              type: string
+            name:
+              title: Имя pod
               type: string
             priorityclass:
               title: priorityClass
@@ -160,11 +224,11 @@ entities:
             ml:
               title: Используется для машинного обучения
               type: boolean
-            deployment_id:
-              title: В каких деплойментах задействован
+            container_id:
+              title: Какие контейнеры включает
               type: array
               items:
-                $ref: "#/$rels/seaf.ta.components.k8s_deployment.k8s_deployment"
+                $ref: "#/$rels/seaf.ta.components.k8s_container.k8s_container"
           required:
             - pod_k8s_id
             - update_strategy
@@ -175,7 +239,6 @@ entities:
             - scheduled
             - secrets
             - access_level
-            - deployment_id
 
   seaf.ta.components.k8s_container:
     title: K8s Container
@@ -192,6 +255,9 @@ entities:
           properties:
             container_id:
               title: Container K8s ID
+              type: string
+            name:
+              title: Имя контейнера
               type: string
             container_type:
               title: Тип контейнера
@@ -237,16 +303,16 @@ entities:
             container_cpu:
               title: Размер CPU, millicore
               type: integer
-            pod_k8s_id:
-              title: В каких подах задействован
-              type: array
-              items:
-                $ref: "#/$rels/seaf.ta.components.k8s_pod.k8s_pod"
             server_id:
               title: Список серверов на которых запущен контейнер
               type: array
               items:
                 $ref: "#/$rels/seaf.ta.components.server.server"
+            k8s_image:
+              title: Какие Image использует контейнер
+              type: array
+              items:
+                $ref: "#/$rels/seaf.ta.components.k8s_image.k8s_image"
           required:
             - container_id
 
@@ -281,11 +347,6 @@ entities:
             description:
               title: Описание использования
               type: string
-            container_id:
-              title: В каких контейнерах задействован
-              type: array
-              items:
-                $ref: "#/$rels/seaf.ta.components.k8s_container.k8s_container"
           required:
             - image_id
             - name
