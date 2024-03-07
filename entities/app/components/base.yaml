@@ -207,9 +207,7 @@ entities:
               properties:
                 is_component_of:
                   title: Указание прикладного сервиса, в рамках которого проектируется или уже создан компонент
-                  oneOf:
-                    - $ref: "#/$rels/components.component"
-                    - $ref: "#/$rels/seaf.app.services.app.service"
+                  $ref: "#/$rels/components.component"
                 component_type:
                   title: Тип прикладного компонента
                   type: string
