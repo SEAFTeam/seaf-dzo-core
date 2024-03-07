@@ -18,7 +18,7 @@ docs:
       (
          [$."seaf.app.services".$spread().{
               "id": $keys()[0],
-              "link": "/entities/seaf.app.services/blank?seaf-app-service-id=" & $keys()[0],
+              "link": "/entities/components/blank?dh-component-id=" & $keys()[0],
               "title": *.title,
               "description": *.description
           }]
