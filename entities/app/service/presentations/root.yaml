@@ -1,5 +1,5 @@
 imports:
-  - blank.yaml
+#  - blank.yaml
   - registry.yaml
-  - summary.yaml
-  - components.yaml
+#  - summary.yaml
+#  - components.yaml
