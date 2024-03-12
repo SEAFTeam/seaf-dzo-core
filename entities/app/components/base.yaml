@@ -181,24 +181,56 @@ entities:
 #            - id
 
         seaf.app.sber.service:
-          title: Описание автоматизированной системы (АС)
-          type: object
-          properties:
-            sber:
-              type: object
-              additionalProperties: false
-              allOf:
-                - $ref: "#/$defs/seaf.app.sber.profile"
-                - $ref: "#/$defs/seaf.app.sber.properties.livestage"
-                - $ref: "#/$defs/seaf.app.sber.properties.ownership"
-                - $ref: "#/$defs/seaf.app.sber.performance"
-                - $ref: "#/$defs/seaf.app.sber.class"
-                - $ref: "#/$defs/seaf.app.sber.role_model"
-                - $ref: "#/$defs/seaf.app.sber.criticality"
-                - $ref: "#/$defs/seaf.app.sber.comments"
+          oneOf:
+            - type: object
+              title: Описание автоматизированной системы (АС)
+              properties:
+                sber:
+                  additionalProperties: false
+                  allOf:
+                    - $ref: "#/$defs/seaf.app.sber.profile"
+                    - $ref: "#/$defs/seaf.app.sber.properties.livestage"
+                    - $ref: "#/$defs/seaf.app.sber.properties.ownership"
+                    - $ref: "#/$defs/seaf.app.sber.performance"
+                    - $ref: "#/$defs/seaf.app.sber.class"
+                    - $ref: "#/$defs/seaf.app.sber.role_model"
+                    - $ref: "#/$defs/seaf.app.sber.criticality"
+                    - $ref: "#/$defs/seaf.app.sber.comments"
+                      properties:
+                        service_type:
+                          type: string
+                          enum:
+                            - Система
+                      required:
+                        - service_type
+            - type: object
+              title: Описание функциональной подсистемы (ФП)
+              properties:
+                sber:
+                  additionalProperties: false
+                  allOf:
+                    - $ref: "#/$defs/seaf.app.sber.profile"
+                    - $ref: "#/$defs/seaf.app.sber.properties.livestage"
+                    - $ref: "#/$defs/seaf.app.sber.properties.ownership"
+                    - $ref: "#/$defs/seaf.app.sber.performance"
+                    - $ref: "#/$defs/seaf.app.sber.class"
+                    - $ref: "#/$defs/seaf.app.sber.role_model"
+                    - $ref: "#/$defs/seaf.app.sber.criticality"
+                    - $ref: "#/$defs/seaf.app.sber.comments"
+                      properties:
+                        service_type:
+                          type: string
+                          enum:
+                            - Функциональная подсистема
+                        parent:
+                          title: Родительская система
+                          $ref: "#/$rels/components.component"
+                      required:
+                        - service_type
+                        - parent
 
         seaf.app.sber.app_component:
-          title: Описание автоматизированной системы (АС)
+          title: Описание прикладного компонента
           $ref: "#/$defs/seaf.app.sber.profile"
           properties:
             sber:
