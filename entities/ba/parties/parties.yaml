@@ -13,6 +13,22 @@ entities:
                 - Крупный и средний бизнес
                 - Крупнейшие клиенты и финансовые институты
                 - Сотрудники компании / компаний Группы
+            has_interest:
+              title: Интересующие продукты
+              description: Продукты потребляемые или потенциально интересные Участнику
+              type: array
+              items:
+                type: object
+                properties:
+                  type:
+                    title: Тип связи
+                    description: Более точная спецификация связи "заинтересован"
+                    type: string
+                    enum:
+                      - Интересуется
+                      - Потребляет
+                required:
+                  - type
             count:
               title: Количество клиентов
               type: integer
