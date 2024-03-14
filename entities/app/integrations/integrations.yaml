@@ -75,10 +75,11 @@ entities:
                     type: string
               required:
                 - id
-                - data-objects
                 - technologies
                 - technical-use
                 - async
                 - status
                 - protected
                 - load
+          required:
+            - data-objects
