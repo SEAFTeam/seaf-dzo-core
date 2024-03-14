@@ -74,7 +74,6 @@ entities:
                   items:
                     type: string
               required:
-                - id
                 - technologies
                 - technical-use
                 - async
