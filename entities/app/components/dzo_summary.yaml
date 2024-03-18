@@ -31,7 +31,7 @@ entities:
               $MANIFEST := $;
               $lookup(components, $component_id).(
                   /* Если это прикладной сервис */
-                  $result := sber[type="service"].(
+                  $result := $[type="service"].sber.(
                     [
                       {
                         "title": "Класс",
@@ -83,7 +83,7 @@ entities:
                       }
                     ]
                   );
-                  $result := $result ? $result : sber[type="component"].(
+                  $result := $result ? $result : $[type="component"].sber.(
                      [
                        {
                          "title": "Масштабируемость",
