@@ -36,3 +36,5 @@ imports:
 
   #Часть 7
   - p7/07.05.3-03.yaml
+
+  - validation/root.yaml

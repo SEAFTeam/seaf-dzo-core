@@ -1,0 +1,25 @@
+rules:
+  validators:
+    seaf.ta.services.cluster_virtualization.existence:
+      uid: cluster_virtualization-error-existence
+      description: >
+        Должны быть определены и описаны кластера виртуализации
+      title: Наличие офисы и отделения
+      source: >
+        (
+            
+              $fn := $.seaf_dzo_core."validation.functions"."cluster_virtualization";
+              $domain := sber.domain;
+              $result := $eval($fn);
+          
+              [$result.iserrors = true ? (
+                  {
+                      "uid": $self.uid & '-01',
+                      "title": "Отсутствуют кластера виртуализации",
+                      "location": "entities/seaf.ta.services.cluster_virtualization/registry?domain=" & $domain,
+                      "correction": 'Необходимо заполнить сущность "seaf.ta.services.cluster_virtualization" системы кластера виртуализации компании',
+                      "description": $self.description
+                  }
+              )]
+            
+        )
