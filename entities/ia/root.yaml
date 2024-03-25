@@ -1,3 +1,2 @@
 imports:
-  - data_objects.yaml
-  - dzo_summary.yaml
+  - data_objects/root.yaml
