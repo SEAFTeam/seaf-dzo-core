@@ -1,0 +1,195 @@
+seaf_dzo_core:
+  validation.functions:
+    monitoring: >
+        (
+            $domain := $.sber.domain;
+            $items := $."seaf.ta.services.monitoring".$spread()[$contains($keys()[0], $domain)];
+            $errors := {'general': $not($exists($items))};
+            $iserrors := true in $errors.* ? true : false;
+            $merge($append($errors, {'iserrors': $iserrors}))
+        )
+    backup: >
+        (
+            $domain := $.sber.domain;
+            $items := $."seaf.ta.services.backup".$spread()[$contains($keys()[0], $domain)];
+            $errors := {'general': $not($exists($items))};
+            $iserrors := true in $errors.* ? true : false;
+            $merge($append($errors, {'iserrors': $iserrors}))
+        )
+    network: >
+        (
+            $domain := $.sber.domain;
+            $items := $."seaf.ta.components.network".$spread()[$contains($keys()[0], $domain)];
+            $errors := {'general': $not($exists($items))};
+            $iserrors := true in $errors.* ? true : false;
+            $merge($append($errors, {'iserrors': $iserrors}))
+        )
+    network_services: >
+        (
+            $domain := $.sber.domain;
+            $items := $."seaf.ta.services.network".$spread()[$contains($keys()[0], $domain)];
+            $errors := {'general': $not($exists($items))};
+            $iserrors := true in $errors.* ? true : false;
+            $merge($append($errors, {'iserrors': $iserrors}))
+        )
+    dc: >
+        (
+            $domain := $.sber.domain;
+            $items := $."seaf.ta.services.dc".$spread()[$contains($keys()[0], $domain)];
+            $errors := {'general': $not($exists($items))};
+            $iserrors := true in $errors.* ? true : false;
+            $merge($append($errors, {'iserrors': $iserrors}))
+        )
+    dc_az: >
+        (
+            $domain := $.sber.domain;
+            $items := $."seaf.ta.services.dc_az".$spread()[$contains($keys()[0], $domain)];
+            $errors := {'general': $not($exists($items))};
+            $iserrors := true in $errors.* ? true : false;
+            $merge($append($errors, {'iserrors': $iserrors}))
+        )
+    office: >
+        (
+            $domain := $.sber.domain;
+            $items := $."seaf.ta.services.office".$spread()[$contains($keys()[0], $domain)];
+            $errors := {'general': $not($exists($items))};
+            $iserrors := true in $errors.* ? true : false;
+            $merge($append($errors, {'iserrors': $iserrors}))
+        )
+    storage: >
+        (
+            $domain := $.sber.domain;
+            $items := $."seaf.ta.services.storage".$spread()[$contains($keys()[0], $domain)];
+            $errors := {'general': $not($exists($items))};
+            $iserrors := true in $errors.* ? true : false;
+            $merge($append($errors, {'iserrors': $iserrors}))
+        )
+    kb: >
+        (
+            $domain := $.sber.domain;
+            $items := $."seaf.ta.services.kb".$spread()[$contains($keys()[0], $domain)];
+            $errors := {'general': $not($exists($items))};
+            $iserrors := true in $errors.* ? true : false;
+            $merge($append($errors, {'iserrors': $iserrors}))
+        )
+    server: >
+        (
+            $domain := $.sber.domain;
+            $items := $."seaf.ta.components.server".$spread()[$contains($keys()[0], $domain)];
+            $errors := {'general': $not($exists($items))};
+            $iserrors := true in $errors.* ? true : false;
+            $merge($append($errors, {'iserrors': $iserrors}))
+        )
+    k8s_statefulset: >
+        (
+            $domain := $.sber.domain;
+            $items := $."seaf.ta.components.k8s_statefulset".$spread()[$contains($keys()[0], $domain)];
+            $errors := {'general': $not($exists($items))};
+            $iserrors := true in $errors.* ? true : false;
+            $merge($append($errors, {'iserrors': $iserrors}))
+        )
+    k8s_pod: >
+        (
+            $domain := $.sber.domain;
+            $items := $."seaf.ta.components.k8s_pod".$spread()[$contains($keys()[0], $domain)];
+            $errors := {'general': $not($exists($items))};
+            $iserrors := true in $errors.* ? true : false;
+            $merge($append($errors, {'iserrors': $iserrors}))
+        )
+    k8s_image: >
+        (
+            $domain := $.sber.domain;
+            $items := $."seaf.ta.components.k8s_image".$spread()[$contains($keys()[0], $domain)];
+            $errors := {'general': $not($exists($items))};
+            $iserrors := true in $errors.* ? true : false;
+            $merge($append($errors, {'iserrors': $iserrors}))
+        )
+    k8s_deployment: >
+        (
+            $domain := $.sber.domain;
+            $items := $."seaf.ta.components.k8s_deployment".$spread()[$contains($keys()[0], $domain)];
+            $errors := {'general': $not($exists($items))};
+            $iserrors := true in $errors.* ? true : false;
+            $merge($append($errors, {'iserrors': $iserrors}))
+        )
+    k8s_container: >
+        (
+            $domain := $.sber.domain;
+            $items := $."seaf.ta.components.k8s_container".$spread()[$contains($keys()[0], $domain)];
+            $errors := {'general': $not($exists($items))};
+            $iserrors := true in $errors.* ? true : false;
+            $merge($append($errors, {'iserrors': $iserrors}))
+        )
+    hw_storage: >
+        (
+            $all := $.dataset;
+            $domain := $.sber.domain;
+            $items := $."seaf.ta.components.hw_storage".$spread()[$contains($keys()[0], $domain)];
+            $errors := {'general': $not($exists($items))};
+            $iserrors := true in $errors.* ? true : false;
+            $merge($append($errors, {'iserrors': $iserrors}))
+        )
+    cluster_virtualization: >
+        (
+            $domain := $.sber.domain;
+            $items := $."seaf.ta.services.cluster_virtualization".$spread()[$contains($keys()[0], $domain)];
+            $errors := {'general': $not($exists($items))};
+            $iserrors := true in $errors.* ? true : false;
+            $merge($append($errors, {'iserrors': $iserrors}))
+        )
+    compute_service: >
+        (
+            $domain := $.sber.domain;
+            $items := $."seaf.ta.services.compute_service".$spread()[$contains($keys()[0], $domain)];
+            $errors := {'general': $not($exists($items))};
+            $iserrors := true in $errors.* ? true : false;
+            $merge($append($errors, {'iserrors': $iserrors}))
+        )
+    cluster: >
+        (
+            $domain := $.sber.domain;
+            $items := $."seaf.ta.services.cluster".$spread()[$contains($keys()[0], $domain)];
+            $errors := {'general': $not($exists($items))};
+            $iserrors := true in $errors.* ? true : false;
+            $merge($append($errors, {'iserrors': $iserrors}))
+        )
+    dc_region: >
+        (
+            $domain := $.sber.domain;
+            $items := $."seaf.ta.services.dc_region".$spread()[$contains($keys()[0], $domain)];
+            $errors := {'general': $not($exists($items))};
+            $iserrors := true in $errors.* ? true : false;
+            $merge($append($errors, {'iserrors': $iserrors}))
+        )
+    network_links: >
+        (
+            $domain := $.sber.domain;
+            $items := $."seaf.ta.services.network_links".$spread()[$contains($keys()[0], $domain)];
+            $errors := {'general': $not($exists($items))};
+            $iserrors := true in $errors.* ? true : false;
+            $merge($append($errors, {'iserrors': $iserrors}))
+        )
+    user_device: >
+        (
+            $domain := $.sber.domain;
+            $items := $."seaf.ta.components.user_device".$spread()[$contains($keys()[0], $domain)];
+            $errors := {'general': $not($exists($items))};
+            $iserrors := true in $errors.* ? true : false;
+            $merge($append($errors, {'iserrors': $iserrors}))
+        )
+    software: >
+        (
+            $domain := $.sber.domain;
+            $items := $."seaf.ta.services.software".$spread()[$contains($keys()[0], $domain)];
+            $errors := {'general': $not($exists($items))};
+            $iserrors := true in $errors.* ? true : false;
+            $merge($append($errors, {'iserrors': $iserrors}))
+        )
+    k8s: >
+        (
+            $domain := $.sber.domain;
+            $items := $."seaf.ta.services.k8s".$spread()[$contains($keys()[0], $domain)];
+            $errors := {'general': $not($exists($items))};
+            $iserrors := true in $errors.* ? true : false;
+            $merge($append($errors, {'iserrors': $iserrors}))
+        )

@@ -1,0 +1,25 @@
+rules:
+  validators:
+    seaf.ta.services.dc.existence:
+      uid: dc-error-existence
+      description: >
+        Должны быть определены и описаны центры обработки данных
+      title: Наличие центров обработки данных
+      source: >
+        (
+            
+              $fn := $.seaf_dzo_core."validation.functions"."dc";
+              $domain := sber.domain;
+              $result := $eval($fn);
+          
+              [$result.iserrors = true ? (
+                  {
+                      "uid": $self.uid & '-01',
+                      "title": "Отсутствуют центрs обработки данных",
+                      "location": "entities/seaf.ta.services.dc/registry?domain=" & $domain,
+                      "correction": 'Необходимо заполнить сущность "seaf.ta.services.dc"',
+                      "description": $self.description
+                  }
+              )]
+            
+        )

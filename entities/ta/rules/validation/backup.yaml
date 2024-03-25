@@ -1,0 +1,25 @@
+rules:
+  validators:
+    seaf.ta.services.backup.existence:
+      uid: backup-error-existence
+      description: >
+        Должны быть определены и описаны системы резервного копирования
+      title: Наличие системы резервного копирования
+      source: >
+        (
+            
+              $fn := $.seaf_dzo_core."validation.functions"."backup";
+              $domain := sber.domain;
+              $result := $eval($fn);
+          
+              [$result.iserrors = true ? (
+                  {
+                      "uid": $self.uid & '-01',
+                      "title": "Отсутствуют системы резервного копирования",
+                      "location": "entities/seaf.ta.services.backup/registry?domain=" & $domain,
+                      "correction": 'Необходимо заполнить сущность "seaf.ta.services.backup" системы резервного копирования компании',
+                      "description": $self.description
+                  }
+              )]
+            
+        )

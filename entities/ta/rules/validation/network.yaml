@@ -1,0 +1,46 @@
+rules:
+  validators:
+    seaf.ta.components.network.existence:
+      uid: network-components-error-existence
+      description: >
+        Должны быть определены и описаны сетевые устройства
+      title: Наличие сетевых устройств
+      source: >
+        (
+            
+              $fn := $.seaf_dzo_core."validation.functions"."network";
+              $domain := sber.domain;
+              $result := $eval($fn);
+          
+              [$result.iserrors = true ? (
+                  {
+                      "uid": $self.uid & '-01',
+                      "title": "Отсутствуют сетевые устройства",
+                      "location": "entities/seaf.ta.components.network/registry?domain=" & $domain,
+                      "correction": 'Необходимо заполнить сущность "seaf.ta.components.network"',
+                      "description": $self.description
+                  }
+              )]
+        )
+    seaf.ta.services.network.existence:
+      uid: network-services-error-existence
+      description: >
+        Должны быть определены и описаны компьютерные сети
+      title: Наличие компьютерных сетей
+      source: >
+        (
+            
+              $fn := $.seaf_dzo_core."validation.functions"."network_services";
+              $domain := sber.domain;
+              $result := $eval($fn);
+          
+              [$result.iserrors = true ? (
+                  {
+                      "uid": $self.uid & '-01',
+                      "title": "Отсутствуют компьютерные сети",
+                      "location": "entities/seaf.ta.services.network/registry?domain=" & $domain,
+                      "correction": 'Необходимо заполнить сущность "seaf.ta.services.network"',
+                      "description": $self.description
+                  }
+              )]
+        )
