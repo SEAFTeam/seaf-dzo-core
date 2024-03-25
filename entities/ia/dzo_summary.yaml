@@ -1,0 +1,48 @@
+entities:
+  seaf.ia.data_objects:
+    presentations:
+      blank:
+        widgets:
+          dzo_summary: # Идентификатор виджета
+            title: Сбер инфо
+            presentation: dzo_summary
+            align: "<"
+            order: 15
+            style:
+              margin: 4px
+              border: true
+      dzo_summary:
+        params:
+          type: object
+          properties:
+            seaf-data-object-id:
+              title: Идентификатор объекта данных
+              type: string
+          required:
+            - seaf-data-object-id
+        type: markdown
+        template: templates/dzo_summary.md
+        source: >
+          (
+              $data_object_id := $params."seaf-data-object-id";
+              $MANIFEST := $;
+              $lookup($."seaf.ia.data_objects", $data_object_id).(
+                $result := sber.(
+                  [
+                    {
+                      "title": "Категория",
+                      "content": category
+                    },
+                    {
+                      "title": "Статус",
+                      "content": status
+                    }
+                  ] 
+                );
+                $result ? $result : (
+                    [{
+                       "title": "Информации нет"
+                    }]      
+                );
+              )
+          )
