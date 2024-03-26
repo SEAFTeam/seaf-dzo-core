@@ -7,17 +7,19 @@ rules:
       title: Наличие вычислительных сервисов
       source: >
         (
-            
-              $fn := $.seaf_dzo_core."validation.functions"."compute_service";
               $domain := sber.domain;
+              $fn := $.seaf_dzo_core."validation.functions"."compute_service";
+              $fn_dzo := $.seaf_dzo_core."validation.functions"."compute_service_dzo";
+             
               $result := $eval($fn);
+              $result_dzo := $eval($fn_dzo);
           
-              [$result.iserrors = true ? (
+              [ $result.iserrors = true and $result_dzo.iserrors = true ? (
                   {
                       "uid": $self.uid & '-01',
                       "title": "Отсутствуют вычислительные сервисы",
                       "location": "entities/seaf.ta.services.compute_service/registry?domain=" & $domain,
-                      "correction": 'Необходимо заполнить сущность "seaf.ta.services.compute_service" вычислительные сервисы компании',
+                      "correction": 'Необходимо заполнить сущность "seaf.ta.services.compute_service" или "seaf.ta.services.compute_service_dzo" вычислительные сервисы компании',
                       "description": $self.description
                   }
               )]

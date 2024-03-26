@@ -7,17 +7,19 @@ rules:
       title: Наличие офисы и отделения
       source: >
         (
-            
-              $fn := $.seaf_dzo_core."validation.functions"."cluster_virtualization";
               $domain := sber.domain;
+              $fn := $.seaf_dzo_core."validation.functions"."cluster_virtualization";
+              $fn_dzo := $.seaf_dzo_core."validation.functions"."cluster_virtualization_dzo";
+             
               $result := $eval($fn);
+              $result_dzo := $eval($fn_dzo);
           
-              [$result.iserrors = true ? (
+              [ $result.iserrors = true and $result_dzo.iserrors = true ? (
                   {
                       "uid": $self.uid & '-01',
                       "title": "Отсутствуют кластера виртуализации",
                       "location": "entities/seaf.ta.services.cluster_virtualization/registry?domain=" & $domain,
-                      "correction": 'Необходимо заполнить сущность "seaf.ta.services.cluster_virtualization" системы кластера виртуализации компании',
+                      "correction": 'Необходимо заполнить сущность "seaf.ta.services.cluster_virtualization" или "seaf.ta.services.cluster_virtualization_dzo" системы кластера виртуализации компании',
                       "description": $self.description
                   }
               )]
