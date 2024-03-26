@@ -1,0 +1,25 @@
+rules:
+  validators:
+    seaf.ta.services.office.existence:
+      uid: office-error-existence
+      description: >
+        Должны быть определены и описаны офисы и отделения
+      title: Наличие офисы и отделения
+      source: >
+        (
+            
+              $fn := $.seaf_dzo_core."validation.functions"."office";
+              $domain := sber.domain;
+              $result := $eval($fn);
+          
+              [$result.iserrors = true ? (
+                  {
+                      "uid": $self.uid & '-01',
+                      "title": "Отсутствуют офисы и отделения",
+                      "location": "entities/seaf.ta.services.office/registry?domain=" & $domain,
+                      "correction": 'Необходимо заполнить сущность "seaf.ta.services.office" системы офисы и отделения компании',
+                      "description": $self.description
+                  }
+              )]
+            
+        )
