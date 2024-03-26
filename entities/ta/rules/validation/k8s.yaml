@@ -7,17 +7,19 @@ rules:
       title: Наличие k8s
       source: >
         (
-            
-              $fn := $.seaf_dzo_core."validation.functions"."k8s";
               $domain := sber.domain;
+              $fn := $.seaf_dzo_core."validation.functions"."k8s";
+              $fn_dzo := $.seaf_dzo_core."validation.functions"."k8s_dzo";
+             
               $result := $eval($fn);
+              $result_dzo := $eval($fn_dzo);
           
-              [$result.iserrors = true ? (
+              [ $result.iserrors = true and $result_dzo.iserrors = true ? (
                   {
                       "uid": $self.uid & '-01',
                       "title": "Отсутствуют k8s",
                       "location": "entities/seaf.ta.services.k8s/registry?domain=" & $domain,
-                      "correction": 'Необходимо заполнить сущность "seaf.ta.services.k8s" k8s компании',
+                      "correction": 'Необходимо заполнить сущность "seaf.ta.services.k8s" или "seaf.ta.services.k8s_dzo" k8s компании',
                       "description": $self.description
                   }
               )]

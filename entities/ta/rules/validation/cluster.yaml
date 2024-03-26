@@ -7,17 +7,19 @@ rules:
       title: Наличие кластеров
       source: >
         (
-            
-              $fn := $.seaf_dzo_core."validation.functions"."cluster";
               $domain := sber.domain;
+              $fn := $.seaf_dzo_core."validation.functions"."cluster";
+              $fn_dzo := $.seaf_dzo_core."validation.functions"."cluster_dzo";
+             
               $result := $eval($fn);
+              $result_dzo := $eval($fn_dzo);
           
-              [$result.iserrors = true ? (
+              [ $result.iserrors = true and $result_dzo.iserrors = true ? (
                   {
                       "uid": $self.uid & '-01',
                       "title": "Отсутствуют кластеров",
                       "location": "entities/seaf.ta.services.cluster/registry?domain=" & $domain,
-                      "correction": 'Необходимо заполнить сущность "seaf.ta.services.cluster" кластеров компании',
+                      "correction": 'Необходимо заполнить сущность "seaf.ta.services.cluster" или "seaf.ta.services.cluster_dzo" кластеров компании',
                       "description": $self.description
                   }
               )]

@@ -7,17 +7,19 @@ rules:
       title: Наличие Зоны доступности обязательно
       source: >
         (
-            
-              $fn := $.seaf_dzo_core."validation.functions"."dc_az";
               $domain := sber.domain;
+              $fn := $.seaf_dzo_core."validation.functions"."dc_az";
+              $fn_dzo := $.seaf_dzo_core."validation.functions"."dc_az_dzo";
+             
               $result := $eval($fn);
+              $result_dzo := $eval($fn_dzo);
           
-              [$result.iserrors = true ? (
+              [ $result.iserrors = true and $result_dzo.iserrors = true ? (
                   {
                       "uid": $self.uid & '-01',
                       "title": "Отсутствуют Зоны доступности",
                       "location": "entities/seaf.ta.services.dc_az/registry?domain=" & $domain,
-                      "correction": 'Необходимо заполнить сущность "seaf.ta.services.dc_az"',
+                      "correction": 'Необходимо заполнить сущность "seaf.ta.services.dc_az" или "seaf.ta.services.dc_az_dzo"',
                       "description": $self.description
                   }
               )]

@@ -7,12 +7,13 @@ rules:
       title: Наличие системы резервного копирования
       source: >
         (
-            
-              $fn := $.seaf_dzo_core."validation.functions"."backup";
               $domain := sber.domain;
+              $fn := $.seaf_dzo_core."validation.functions"."backup";
+              $fn_dzo := $.seaf_dzo_core."validation.functions"."backup_dzo";
               $result := $eval($fn);
+              $result_dzo := $eval($fn_dzo);
           
-              [$result.iserrors = true ? (
+              [ $result.iserrors = true and $result_dzo.iserrors = true ? (
                   {
                       "uid": $self.uid & '-01',
                       "title": "Отсутствуют системы резервного копирования",
@@ -20,6 +21,5 @@ rules:
                       "correction": 'Необходимо заполнить сущность "seaf.ta.services.backup" системы резервного копирования компании',
                       "description": $self.description
                   }
-              )]
-            
+              )]        
         )

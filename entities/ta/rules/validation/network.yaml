@@ -7,17 +7,19 @@ rules:
       title: Наличие сетевых устройств
       source: >
         (
-            
-              $fn := $.seaf_dzo_core."validation.functions"."network";
               $domain := sber.domain;
+              $fn := $.seaf_dzo_core."validation.functions"."network";
+              $fn_dzo := $.seaf_dzo_core."validation.functions"."network_dzo";
+             
               $result := $eval($fn);
+              $result_dzo := $eval($fn_dzo);
           
-              [$result.iserrors = true ? (
+              [ $result.iserrors = true and $result_dzo.iserrors = true ? (
                   {
                       "uid": $self.uid & '-01',
                       "title": "Отсутствуют сетевые устройства",
                       "location": "entities/seaf.ta.components.network/registry?domain=" & $domain,
-                      "correction": 'Необходимо заполнить сущность "seaf.ta.components.network"',
+                      "correction": 'Необходимо заполнить сущность "seaf.ta.components.network" или "seaf.ta.components.network_dzo"',
                       "description": $self.description
                   }
               )]

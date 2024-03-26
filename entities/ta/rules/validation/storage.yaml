@@ -7,17 +7,19 @@ rules:
       title: Наличие систем хранения данных
       source: >
         (
-            
-              $fn := $.seaf_dzo_core."validation.functions"."storage";
               $domain := sber.domain;
+              $fn := $.seaf_dzo_core."validation.functions"."storage_az";
+              $fn_dzo := $.seaf_dzo_core."validation.functions"."storage_dzo";
+             
               $result := $eval($fn);
+              $result_dzo := $eval($fn_dzo);
           
-              [$result.iserrors = true ? (
+              [ $result.iserrors = true and $result_dzo.iserrors = true ? (
                   {
                       "uid": $self.uid & '-01',
                       "title": "Отсутствуют системы хранения данных",
                       "location": "entities/seaf.ta.services.storage/registry?domain=" & $domain,
-                      "correction": 'Необходимо заполнить сущность "seaf.ta.services.storage" системы хранения данных компании',
+                      "correction": 'Необходимо заполнить сущность "seaf.ta.services.storage" или "seaf.ta.services.storage_dzo" системы хранения данных компании',
                       "description": $self.description
                   }
               )]
