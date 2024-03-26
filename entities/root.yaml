@@ -1,4 +1,5 @@
 imports:
   - ba/root.yaml
   - app/root.yaml
+  - ia/root.yaml
   - ta/root.yaml

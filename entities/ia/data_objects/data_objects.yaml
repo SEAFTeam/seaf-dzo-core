@@ -1,0 +1,42 @@
+entities:
+  seaf.ia.data_objects:
+    title: Объекты данных
+    schema:
+      type: object
+      patternProperties:
+        "[a-zA-Z0-9_]*(\\.[a-zA-Z0-9_]*)*$":
+          type: object
+          properties:
+            sber:
+              type: object
+              properties:
+                id:
+                  title: Уникальный идентификатор компонента
+                  type: string
+                  format: uuid
+                category:
+                  title: Категория
+                  type: string
+                  enum:
+                    - Перс данные
+                    - Медицинские данные
+                    - Платежные данные (карты)
+                    - Коммерческая тайна
+                    - Прочее
+                status:
+                  title: Статус
+                  type: string
+                  enum:
+                    - Планируется
+                    - Разрабатывается или модифицируется
+                    - Используется
+                    - Выводится из эксплуатации
+                    - В архиве
+                comments:
+                  title: Комментарии, риски, проблемы
+                  type: array
+                  items:
+                    type: string
+              required:
+                - category
+                - status
