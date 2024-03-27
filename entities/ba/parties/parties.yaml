@@ -5,14 +5,6 @@ entities:
       patternProperties:
         "[a-zA-Z0-9_]*(\\.[a-zA-Z0-9_]*)*$":
           properties:
-            type:
-              title: Тип клиентов
-              enum:
-                - Физические лица
-                - Микро/Малый бизнес
-                - Крупный и средний бизнес
-                - Крупнейшие клиенты и финансовые институты
-                - Сотрудники компании / компаний Группы
             has_interest:
               title: Интересующие продукты
               description: Продукты потребляемые или потенциально интересные Участнику
@@ -29,10 +21,27 @@ entities:
                       - Потребляет
                 required:
                   - type
-            count:
-              title: Количество клиентов
-              type: integer
-            measure:
-              title: Ед. измерения количественной оценки клиентов
-              type: string
+            sber:
+              type: object
+              additionalProperties: false
+              properties:
+                id:
+                  type: string
+                  title: Идентификатор участника
+                type:
+                  title: Тип клиентов
+                  enum:
+                    - Физические лица
+                    - Микро/Малый бизнес
+                    - Крупный и средний бизнес
+                    - Крупнейшие клиенты и финансовые институты
+                    - Сотрудники компании / компаний Группы
+                count:
+                  title: Количество клиентов
+                  type: integer
+                measure:
+                  title: Ед. измерения количественной оценки клиентов
+                  type: string
+              required:
+                - type
         
