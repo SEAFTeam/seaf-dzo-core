@@ -1,0 +1,31 @@
+entities:
+  seaf.ia.business_objects:
+    title: Бизнес-объекты
+    schema:
+      type: object
+      patternProperties:
+        "[a-zA-Z0-9_]*(\\.[a-zA-Z0-9_]*)*$":
+          type: object
+          properties:
+            sber:
+              type: object
+              properties:
+                id:
+                  title: Уникальный идентификатор компонента
+                  type: string
+                  format: uuid
+                status:
+                  title: Статус
+                  enum:
+                    - Планируется
+                    - Разрабатывается или модифицируется
+                    - Используется
+                    - Выводится из эксплуатации
+                    - В архиве
+                comments:
+                  title: Комментарии, риски, проблемы
+                  type: array
+                  items:
+                    type: string
+              required:
+                - status
