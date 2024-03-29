@@ -1,0 +1,48 @@
+entities:
+  seaf.ia.business_objects:
+    presentations:
+      blank:
+        widgets:
+          dzo_summary: # Идентификатор виджета
+            title: Сбер инфо
+            presentation: dzo_summary
+            align: "<"
+            order: 15
+            style:
+              margin: 4px
+              border: true
+      dzo_summary:
+        params:
+          type: object
+          properties:
+            seaf-business-object-id:
+              title: Идентификатор бизнес объекта
+              type: string
+          required:
+            - seaf-business-object-id
+        type: markdown
+        template: templates/dzo_summary.md
+        source: >
+          (
+              $business_object_id := $params."seaf-business-object-id";
+              $MANIFEST := $;
+              $lookup($."seaf.ia.business_objects", $business_object_id).(
+                $result := sber.(
+                  [
+                    {
+                      "title": "Статус",
+                      "content": status
+                    },
+                    {
+                      "title": "Комментарии, риски, проблемы",
+                      "content": comments
+                    }
+                  ] 
+                );
+                $result ? $result : (
+                    [{
+                       "title": "Информации нет"
+                    }]      
+                );
+              )
+          )
