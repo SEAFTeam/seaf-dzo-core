@@ -18,7 +18,7 @@ rules:
                       "uid": $self.uid & '-01',
                       "title": "Отсутствуют системы резервного копирования",
                       "location": "entities/seaf.ta.services.backup/registry?domain=" & $domain,
-                      "correction": 'Необходимо заполнить сущность "seaf.ta.services.backup" системы резервного копирования компании',
+                      "correction": 'Необходимо заполнить сущность "seaf.ta.services.backup" или "seaf.ta.services.backup_dzo" системы резервного копирования компании',
                       "description": $self.description
                   }
               )]        
