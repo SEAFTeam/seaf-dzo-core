@@ -31,12 +31,12 @@ entities:
               oneOf:
                 - type: object
                   properties:
-                    subtype:
+                    type:
                       type: string
                       title: Подтип продукта
                       enum:
                         - Канал
-                    type:
+                    channel_type:
                       title: Тип канала
                       enum:
                         - Цифровой
@@ -46,12 +46,12 @@ entities:
                       title: Способы защиты канала
                       type: string
                   required:
-                    - subtype
                     - type
+                    - channel_type
                     - security
                 - type: object
                   properties:
-                    subtype:
+                    type:
                       type: string
                       title: Подтип продукта
                       default: Продукт
