@@ -4,38 +4,58 @@ entities:
       patternProperties:
         "[a-zA-Z0-9_]*(\\.[a-zA-Z0-9_]*)*$":
           properties:
-            systems:
-              title: Связи с АС
-              type: array
-              items:
-                $ref: "#/$rels/components.component"
-            is_channel:
-              title: является каналом
+            sber:
               type: object
-              properties: 
-                type:
-                  title: Тип канала
-                  enum:
-                    - Цифровой
-                    - Физический
-                    - Смешанный
-                security:
-                  title: Способы защиты канала
+              additionalProperties: false
+              properties:
+                id:
                   type: string
+                  title: Идентификатор продукта
+                systems:
+                  title: Связи с АС
+                  type: array
+                  items:
+                    $ref: "#/$rels/components.component"
+                status:
+                  title: Статус
+                  enum:
+                    - Создается
+                    - Используется
+                    - Выводится
+                    - В архиве
+                comments:
+                  title: Комментарии, риски, проблемы
+                  type: array
+                  items:
+                    type: string
+              oneOf:
+                - type: object
+                  properties:
+                    type:
+                      type: string
+                      title: Подтип продукта
+                      enum:
+                        - Канал
+                    channel_type:
+                      title: Тип канала
+                      enum:
+                        - Цифровой
+                        - Физический
+                        - Смешанный
+                    security:
+                      title: Способы защиты канала
+                      type: string
+                  required:
+                    - type
+                    - channel_type
+                    - security
+                - type: object
+                  properties:
+                    type:
+                      type: string
+                      title: Подтип продукта
+                      default: Продукт
+                      enum:
+                        - Продукт
               required:
-                - type
-                - security
-            status:
-              title: Статус
-              enum:
-                - Создается
-                - Используется
-                - Выводится
-                - В архиве
-            comments:
-              title: Комментарии, риски, проблемы
-              type: array
-              items:
-                type: string
-          required:
-            - status
+                - status
