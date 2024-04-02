@@ -181,21 +181,21 @@ entities:
 #            - id
 
         seaf.app.sber.service:
-          oneOf:
-            - type: object
-              title: Описание автоматизированной системы (АС)
-              properties:
-                sber:
-                  additionalProperties: false
-                  allOf:
-                    - $ref: "#/$defs/seaf.app.sber.profile"
-                    - $ref: "#/$defs/seaf.app.sber.properties.livestage"
-                    - $ref: "#/$defs/seaf.app.sber.properties.ownership"
-                    - $ref: "#/$defs/seaf.app.sber.performance"
-                    - $ref: "#/$defs/seaf.app.sber.class"
-                    - $ref: "#/$defs/seaf.app.sber.role_model"
-                    - $ref: "#/$defs/seaf.app.sber.criticality"
-                    - $ref: "#/$defs/seaf.app.sber.comments"
+          title: Описание автоматизированной системы (АС) / функциональной подсистемы (ФП)
+          properties:
+            sber:
+              additionalProperties: false
+              allOf:
+                - $ref: "#/$defs/seaf.app.sber.profile"
+                - $ref: "#/$defs/seaf.app.sber.properties.livestage"
+                - $ref: "#/$defs/seaf.app.sber.properties.ownership"
+                - $ref: "#/$defs/seaf.app.sber.performance"
+                - $ref: "#/$defs/seaf.app.sber.class"
+                - $ref: "#/$defs/seaf.app.sber.role_model"
+                - $ref: "#/$defs/seaf.app.sber.criticality"
+                - $ref: "#/$defs/seaf.app.sber.comments"
+                  oneOf:
+                    - type: object
                       properties:
                         service_type:
                           type: string
@@ -203,20 +203,7 @@ entities:
                             - Система
                       required:
                         - service_type
-            - type: object
-              title: Описание функциональной подсистемы (ФП)
-              properties:
-                sber:
-                  additionalProperties: false
-                  allOf:
-                    - $ref: "#/$defs/seaf.app.sber.profile"
-                    - $ref: "#/$defs/seaf.app.sber.properties.livestage"
-                    - $ref: "#/$defs/seaf.app.sber.properties.ownership"
-                    - $ref: "#/$defs/seaf.app.sber.performance"
-                    - $ref: "#/$defs/seaf.app.sber.class"
-                    - $ref: "#/$defs/seaf.app.sber.role_model"
-                    - $ref: "#/$defs/seaf.app.sber.criticality"
-                    - $ref: "#/$defs/seaf.app.sber.comments"
+                    - type: object
                       properties:
                         service_type:
                           type: string
