@@ -33,15 +33,17 @@ rules:
         (
             
               $fn := $.seaf_dzo_core."validation.functions"."network_services";
+              $fn_dzo := $.seaf_dzo_core."validation.functions"."network_services_dzo";
               $domain := sber.domain;
               $result := $eval($fn);
+              $result_dzo := $eval($fn_dzo);
           
-              [$result.iserrors = true ? (
+              [ $result.iserrors = true and $result_dzo.iserrors = true ? (
                   {
                       "uid": $self.uid & '-01',
                       "title": "Отсутствуют компьютерные сети",
                       "location": "entities/seaf.ta.services.network/registry?domain=" & $domain,
-                      "correction": 'Необходимо заполнить сущность "seaf.ta.services.network"',
+                      "correction": 'Необходимо заполнить сущность "seaf.ta.services.network"или "seaf.ta.services.network_dzo"',
                       "description": $self.description
                   }
               )]
