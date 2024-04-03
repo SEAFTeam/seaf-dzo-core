@@ -11,7 +11,7 @@ rules:
       title: TACIR_1-КП-КО-1-01
       source: >
         (
-          $metal := $."seaf.ta.services.k8s_dzo";
+          $metal := $."seaf.ta.services.k8s";
           [$metal.$spread().(
             $master_qty := $[$not($exists(*.master_qty)) or *.master_qty < 3 or $not($exists(*.worker_qty)) or *.worker_qty < 2  ].$keys();
             $master_qty.{

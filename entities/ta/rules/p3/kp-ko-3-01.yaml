@@ -9,9 +9,9 @@ rules:
       title: TACIR_1-КП-КО-3-01
       source: >
         (
-          $metal := $."seaf.ta.services.k8s_dzo";
+          $metal := $."seaf.ta.services.k8s";
           [$metal.$spread().(
-            $reservation_rate := $[$not($exists(*.reservation_rate)) or *.reservation_rate < 100].$keys();
+            $reservation_rate := $[$not($exists(*.sber.reservation_rate)) or *.sber.reservation_rate < 100].$keys();
             $reservation_rate.{
               "uid": "sber.standards.v3.p3." & $self.uid & "." & "\"" & $ & "\"",
               "title": $self.title & " " & $,

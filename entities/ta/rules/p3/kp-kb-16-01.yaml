@@ -9,9 +9,9 @@ rules:
       title: TACIR_1-КП-КБ-16-01
       source: >
         (
-          $metal := $."seaf.ta.services.k8s_dzo";
+          $metal := $."seaf.ta.services.k8s";
           [$metal.$spread().(
-            $anonymous_api_connect := $[$not($exists(*.anonymous_api_connect))  or (*.anonymous_api_connect)].$keys();
+            $anonymous_api_connect := $[$not($exists(*.sber.anonymous_api_connect))  or (*.sber.anonymous_api_connect)].$keys();
             $anonymous_api_connect.{
               "uid": "sber.standards.v3.p3." & $self.uid & "." & "\"" & $ & "\"",
               "title": $self.title & " " & $,

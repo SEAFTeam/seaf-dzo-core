@@ -13,9 +13,9 @@ rules:
       title: TACIR_2-Ч04.01.12.1-03
       source: >
         (
-          $metal := $."seaf.ta.components.hw_storage_dzo";
+          $metal := $."seaf.ta.components.hw_storage";
           [$metal.$spread().(
-            $hardware := $[$not($exists(*.storage_controller_qty)) or *.storage_controller_qty < 2 or $not($exists(*.storage_spare_disk_qty)) or *.storage_spare_disk_qty < 1 or $not($exists(*.pwr_supply_qty)) or *.pwr_supply_qty < 2].$keys();
+            $hardware := $[$not($exists(*.sber.storage_controller_qty)) or *.sber.storage_controller_qty < 2 or $not($exists(*.sber.storage_spare_disk_qty)) or *.sber.storage_spare_disk_qty < 1 or $not($exists(*.sber.pwr_supply_qty)) or *.sber.pwr_supply_qty < 2].$keys();
             $hardware.{
               "uid": "sber.standards.v3.p4." & $self.uid & "." & "\"" & $ & "\"",
               "title": $self.title & " " & $,
