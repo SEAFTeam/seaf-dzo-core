@@ -13,9 +13,9 @@ rules:
       title: ТАCMN_1-Ч06.01.13-02
       source: >
         (
-          $metal := $."seaf.ta.services.monitoring_dzo";
+          $metal := $."seaf.ta.services.monitoring";
           [$metal.$spread().(
-            $sber_radar := $[$not($exists(*.sber_radar))].$keys();
+            $sber_radar := $[$not($exists(*.sber.sber_radar))].$keys();
             $sber_radar.{
               "uid": "sber.standards.v3.p6." & $self.uid & "." & "\"" & $ & "\"",
               "title": $self.title & " " & $,

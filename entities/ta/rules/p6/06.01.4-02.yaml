@@ -3,15 +3,15 @@ rules:
     sber.standards.v3.part6.6_01_4-02:
       uid: TACMN_1-Ч06.01.4-02
       description: >
-        СХД должны быть зарезервированы в разных зонах доступности, чтобы обеспечить 100% производительности и емкости дискового пространства, а так же защиту от потери данных с необходимым уровнем RPO.
+        Система мониторинга должна включать функции визуализации данных мониторинга и\или специально разработанный API.
       correction: >
         Добавьте ссылку на консоль системы мониторинга.
       title: TACMN_1-Ч06.01.4-02
       source: >
         (
-          $metal := $."seaf.ta.services.monitoring_dzo";
+          $metal := $."seaf.ta.services.monitoring";
           [$metal.$spread().(
-            $monitoring_console := $[$not($exists(*.monitoring_console))].$keys();
+            $monitoring_console :=  $[$not($exists(*.sber.monitoring_console))].$keys();
             $monitoring_console.{
               "uid": "sber.standards.v3.p6." & $self.uid & "." & "\"" & $ & "\"",
               "title": $self.title & " " & $,

@@ -9,7 +9,7 @@ rules:
       title: TACAP_2-Ч07.ОКБ-5.3-03
       source: >
         (
-          $metal := $."seaf.ta.components.network_dzo";
+          $metal := $."seaf.ta.components.network";
           [$metal.$spread().(
             $auth_type := $[$not($exists(*.auth_type)) or *.auth_type = 'Отсутствует'].$keys();
             $auth_type.{

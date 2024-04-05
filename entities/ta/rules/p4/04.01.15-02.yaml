@@ -9,9 +9,9 @@ rules:
       title: TACIR_2-Ч04.01.15-02
       source: >
         (
-          $metal := $."seaf.ta.components.hw_storage_dzo";
+          $metal := $."seaf.ta.components.hw_storage";
           [$metal.$spread().(
-            $reservation_ratio := $[$not($exists(*.reservation_ratio)) or *.reservation_ratio < 50].$keys();
+            $reservation_ratio := $[$not($exists(*.sber.reservation_ratio)) or *.sber.reservation_ratio < 50].$keys();
             $reservation_ratio.{
               "uid": "sber.standards.v3.p4." & $self.uid & "." & "\"" & $ & "\"",
               "title": $self.title & " " & $,

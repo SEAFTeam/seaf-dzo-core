@@ -1,17 +1,17 @@
 rules:
   validators:
-    sber.standards.v3.part4.4_01_7-01:
-      uid: TACIR_2-Ч04.01.7-01
+    sber.standards.v3.part4.4_01_10-02:
+      uid: TACIR_2-Ч04.01.10-02
       description: >
-        Развертывание, управление и мониторинг СХД должны осуществляться через интерфейс или командную строку модулей управления (мanagement module) СХД или средства управления.
+        Наличие (за исключением систем объектного хранения) встроенного механизма резервного копирования и восстановления данных (snapshot, clone) без необходимости прекращения работы приложения.
       correction: >
-#todo дописать корректировку для TACIR_2-Ч04.01.7-01
-      title: TACIR_2-Ч04.01.7-01
+#todo дописать корректировку для TACIR_2-Ч04.01.10-02
+      title: TACIR_2-Ч04.01.10-02
       source: >
         (
-          $metal := $."seaf.ta.components.hw_storage_dzo";
+          $metal := $."seaf.ta.components.hw_storage";
           [$metal.$spread().(
-            $storage_console := $[$not($exists(*.storage_console))].$keys();
+            $storage_console := $[$not($exists(*.sber.snapshot_lic))].$keys();
             $storage_console.{
               "uid": "sber.standards.v3.p4." & $self.uid & "." & "\"" & $ & "\"",
               "title": $self.title & " " & $,

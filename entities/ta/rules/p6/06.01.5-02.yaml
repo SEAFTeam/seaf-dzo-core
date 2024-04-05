@@ -9,9 +9,9 @@ rules:
       title: ТАCMN_1-Ч06.01.5-02
       source: >
         (
-          $metal := $."seaf.ta.services.monitoring_dzo";
+          $metal := $."seaf.ta.services.monitoring";
           [$metal.$spread().(
-            $alarm_transport := $[$not($exists(*.alarm_transport))].$keys();
+            $alarm_transport := $[$not($exists(*.sber.alarm_transport))].$keys();
             $alarm_transport.{
               "uid": "sber.standards.v3.p6." & $self.uid & "." & "\"" & $ & "\"",
               "title": $self.title & " " & $,

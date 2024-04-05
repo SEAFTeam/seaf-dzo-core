@@ -9,9 +9,9 @@ rules:
       title: TACIR_2-Ч04.01.12.2-03
       source: >
         (
-          $metal := $."seaf.ta.components.hw_storage_dzo";
+          $metal := $."seaf.ta.components.hw_storage";
           [$metal.$spread().(
-            $links_qty := $[$not($exists(*.links_qty)) or *.links_qty < 2 ].$keys();
+            $links_qty := $[$not($exists(*.sber.links_qty)) or *.sber.links_qty < 2 ].$keys();
             $links_qty.{
               "uid": "sber.standards.v3.p4." & $self.uid & "." & "\"" & $ & "\"",
               "title": $self.title & " " & $,

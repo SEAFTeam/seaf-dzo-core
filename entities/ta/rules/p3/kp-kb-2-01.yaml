@@ -1,6 +1,6 @@
 rules:
   validators:
-    sber.standards.v3.part3.kb-2-01:
+    sber.standards.v3.part3.kb-02-01:
       uid: TACIR_1-КП-КБ-2-01
       description: >
         В каждом кластере должно быть исключено отсутствие или отключение средств синхронизации времени.
@@ -9,9 +9,9 @@ rules:
       title: TACIR_1-КП-КБ-2-01
       source: >
         (
-          $metal := $."seaf.ta.services.k8s_dzo";
+          $metal := $."seaf.ta.services.k8s";
           [$metal.$spread().(
-            $ntp_server := $[$not($exists(*.ntp_server))].$keys();
+            $ntp_server := $[$not($exists(*.sber.ntp_server))].$keys();
             $ntp_server.{
               "uid": "sber.standards.v3.p3." & $self.uid & "." & "\"" & $ & "\"",
               "title": $self.title & " " & $,

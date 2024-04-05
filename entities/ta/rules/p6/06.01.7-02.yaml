@@ -9,9 +9,9 @@ rules:
       title: TACMN_1-Ч06.01.7-02
       source: >
         (
-          $metal := $."seaf.ta.services.monitoring_dzo";
+          $metal := $."seaf.ta.services.monitoring";
           [$metal.$spread().(
-            $cluster_id := $[$not($exists(*.cluster_id))].$keys();
+            $cluster_id := $[$not($exists(*.sber.cluster_id))].$keys();
             $cluster_id.{
               "uid": "sber.standards.v3.p6." & $self.uid & "." & "\"" & $ & "\"",
               "title": $self.title & " " & $,
