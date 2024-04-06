@@ -1,6 +1,6 @@
 rules:
   validators:
-    seaf.ta.components.k8s_statefulset.existence:
+    seaf.ta.components.k8s.k8s_statefulset.existence:
       uid: k8s_statefulset-error-existence
       description: >
         Должны быть определены и описаны statefulset. Если их нет, то создать exception.

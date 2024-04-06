@@ -1,6 +1,6 @@
 rules:
   validators:
-    seaf.ta.components.k8s_image.existence:
+    seaf.ta.components.k8s.k8s_image.existence:
       uid: k8s_image-error-existence
       description: >
         Должны быть определены и описаны образы контейнеров

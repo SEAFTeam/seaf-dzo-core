@@ -1,6 +1,6 @@
 rules:
   validators:
-    seaf.ta.components.k8s_pod.existence:
+    seaf.ta.components.k8s.k8s_pod.existence:
       uid: k8s_pod-error-existence
       description: >
         Должны быть определены и описаны pods

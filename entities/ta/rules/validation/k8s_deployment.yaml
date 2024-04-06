@@ -1,6 +1,6 @@
 rules:
   validators:
-    seaf.ta.components.k8s_deployment.existence:
+    seaf.ta.components.k8s.k8s_deployment.existence:
       uid: k8s_deployment-error-existence
       description: >
         Должны быть определены и описаны k8s deployment
