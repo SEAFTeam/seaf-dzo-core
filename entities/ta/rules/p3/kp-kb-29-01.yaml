@@ -3,9 +3,9 @@ rules:
     sber.standards.v3.part3.kb-18-01:
       uid: TACIR_1-КП-КБ-29-01
       description: >
-        Запрещено использовать незащищенные порты при взаимодействии c API компонентов платформы.
+        Запрещено использовать Persistent Volume
       correction: >
-        Включить HTTPS при взаимодействии c API компонентов платформы.
+        Исключить использование Persistent Volume
       title: TACIR_1-КП-КБ-29-01
       source: >
         (
