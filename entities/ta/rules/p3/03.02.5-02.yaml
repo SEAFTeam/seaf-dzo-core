@@ -9,9 +9,9 @@ rules:
       title: TACIR_1-Ч03.02.5-02
       source: >
         (
-          $metal := $."seaf.ta.components.server_metal_dzo";
+          $metal := $."seaf.ta.components.server";
           [$metal.$spread().(
-            $hard := $[$not($exists(*.raid_spare_disks))].$keys();
+            $hard := $[$not($exists(*.sber.raid_spare_disks)) and *.type='Физический'].$keys();
             $hard.{
               "uid": "sber.standards.v3.p3." & $self.uid & "." & "\"" & $ & "\"",
               "title": $self.title & " " & $,

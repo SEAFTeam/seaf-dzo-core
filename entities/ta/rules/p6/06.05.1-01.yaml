@@ -9,9 +9,9 @@ rules:
       title: TACMN_1-Ч06.05.1-01
       source: >
         (
-          $metal := $."seaf.ta.services.monitoring_dzo";
+          $metal := $."seaf.ta.services.monitoring";
           [$metal.$spread().(
-            $pam_anabled := $[$not($exists(*.pam_anabled)) or $not (*.pam_anabled)].$keys();
+            $pam_anabled := $[$not($exists(*.sber.pam_anabled)) or $not (*.sber.pam_anabled)].$keys();
             $pam_anabled.{
               "uid": "sber.standards.v3.p6." & $self.uid & "." & "\"" & $ & "\"",
               "title": $self.title & " " & $,

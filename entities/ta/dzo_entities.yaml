@@ -451,6 +451,7 @@ entities:
             reservation_ratio:
               title: % резервирования объёма в другом ЦОДе
               type: integer
+            #Часть 4. TACIR_2-Ч04.01.4-01
             erasure_coding:
               title: Параметр чётности
               type: integer

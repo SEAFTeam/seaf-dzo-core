@@ -9,9 +9,9 @@ rules:
       title: TACIR_1-КП-КБ-29-01
       source: >
         (
-          $metal := $."seaf.ta.services.k8s_dzo";
+          $metal := $."seaf.ta.services.k8s";
           [$metal.$spread().(
-            $pv := $[$not($exists(*.pv))  or (*.pv)].$keys();
+            $pv := $[$not($exists(*.sber.pv))  or (*.sber.pv)].$keys();
             $pv.{
               "uid": "sber.standards.v3.p3." & $self.uid & "." & "\"" & $ & "\"",
               "title": $self.title & " " & $,

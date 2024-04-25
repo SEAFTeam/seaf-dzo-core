@@ -9,9 +9,9 @@ rules:
       title: TACIR_2-Ч04.01.3-01
       source: >
         (
-          $metal := $."seaf.ta.components.hw_storage_dzo";
+          $metal := $."seaf.ta.components.hw_storage";
           [$metal.$spread().(
-            $nvram_amount := $[$not($exists(*.nvram_amount)) or *.nvram_amount >= 1].$keys();
+            $nvram_amount := $[$not($exists(*.sber.nvram_amount)) or *.sber.nvram_amount >= 1].$keys();
             $nvram_amount.{
               "uid": "sber.standards.v3.p4." & $self.uid & "." & "\"" & $ & "\"",
               "title": $self.title & " " & $,

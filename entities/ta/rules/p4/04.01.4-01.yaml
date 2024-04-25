@@ -9,9 +9,9 @@ rules:
       title: TACIR_2-Ч04.01.4-01
       source: >
         (
-          $metal := $."seaf.ta.services.sw_storage";
+          $metal := $."seaf.ta.components.hw_storage";
           [$metal.$spread().(
-            $erasure := $[$not($exists(*.erasure_coding)) or *.erasure_coding > 1].$keys();
+            $erasure := $[$not($exists(*.sber.erasure_coding)) or *.sber.erasure_coding > 1 or $not($exists(*.sber.dedup_rate)) or *.sber.dedup_rate <= 1 or $not($exists(*.sber.compression_rate)) or *.sber.compression_rate <= 1].$keys();
             $erasure.{
               "uid": "sber.standards.v3.p4." & $self.uid & "." & "\"" & $ & "\"",
               "title": $self.title & " " & $,
