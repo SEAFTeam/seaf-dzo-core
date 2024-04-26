@@ -1,0 +1,62 @@
+entities:
+  seaf.change.requirements:
+    schema:
+      type: object
+      patternProperties:
+        "^[a-z0-9_\\$][a-z0-9_\\$]*(\\.[a-z0-9_\\$][a-z0-9_\\$]*)*$":
+#          $ref: "#/$defs/seaf.change.requirements.def"
+          properties:
+            sber:
+              type: object
+              properties:
+                id_sib: # Сбер-специфичное свойство
+                  title: Идентификатор требования SIB
+                  type: string
+                id_sib_previous: #Сбер-специфичное необязательное свойство - код предыдущей версии для требований у которых не изменился текст, но изменился код
+                  title: Идентификатор предыдущей версии для требований у которых не изменился текст но изменился код
+                  type: string
+                standard_version: # Сбер-специфичное свойство
+                  title: Версия стандарта в соответствии с подходом Сбер
+                  type: string
+                applicability_level: # Сбер-специфичное свойство, в котором отражается класс критичности АС, на которые распространяется требование
+                  title: Класс критичности объекта, к которому применяется требование
+                  type: array
+                  items:
+                    type: string
+                    enum:
+                      - Mission Critical
+                      - Business Critical
+                      - Business Operational
+                      - Office Productivity
+                      - Все
+                obj_und_ctrl:
+                  title: список объектов из справочника объектов архитектурного контроля
+                  type: array
+                  items:
+                    type: string
+                    enum:
+                      - sber.obj.dc
+                      - sber.obj.network.structure
+                      - sber.obj.network.dc
+                      - sber.obj.network.extnet
+                      - sber.obj.network.transportnet
+                      - sber.obj.network.localnet
+                      - sber.obj.servers
+                      - sber.obj.orchestration
+                      - sber.obj.storage
+                      - sber.obj.backuprestore
+                      - sber.obj.usrworkplace
+                      - sber.obj.monitoring
+                      - sber.obj.informationsystem
+                      - sber.obj.integration
+                      - sber.obj.informationsystem.cn
+                      - sber.obj.informationsystem.reliability
+                      - sber.obj.virtualization
+                      - sber.obj.informationsystem.reliability.stand_in
+                      - sber.obj.informationsystem.reliability.active_active
+                      - sber.obj.informationsystem.reliability.parallel_run
+              required:
+                - id_sib
+                - standard_version
+                - applicability_level
+                - obj_und_ctrl
