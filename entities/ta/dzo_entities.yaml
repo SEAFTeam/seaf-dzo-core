@@ -10,10 +10,6 @@ entities:
             reservation_rate:
               title: Процент резервирования вычислительных ресурсов кластера в другой зоне доступности
               type: integer
-            #Часть 3. TACIR_1-КП-КО-4-01.
-            az_used:
-              title: Количество зон доступности в которых развёрнут кластер K8s
-              type: integer
             #Часть 3. TACIR_1-КП-КБ-2-01.
             ntp_server:
               title: Адрес NTP сервера с которым синхронизируются все ноды кластера
@@ -55,7 +51,6 @@ entities:
                 - В архиве
           required:
             - reservation_rate
-            - az_used
             - ntp_server
             - tls_version
             - anonymous_api_connect
