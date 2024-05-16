@@ -11,7 +11,7 @@ rules:
         (
           $metal := $."seaf.ta.services.k8s";
           [$metal.$spread().(
-            $az_used := $[$not($exists(*.sber.sber.az_used)) or *.sber.sber.az_used >= 2].$keys();
+            $az_used := $[$not($exists(*.availabilityzone_id)) or $count(*.availabilityzone_id) > 1].$keys();
             $az_used.{
               "uid": "sber.standards.v3.p3." & $self.uid & "." & "\"" & $ & "\"",
               "title": $self.title & " " & $,
