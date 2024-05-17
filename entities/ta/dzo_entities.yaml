@@ -84,6 +84,9 @@ entities:
               title: Стратегия обновления
               type: string
               enum: [RollingUpdate, Recreate]
+            hpa:
+              title: HPA\VPA для деплоймента включён
+              type: boolean
             replicas:
               title: Количество реплик
               type: integer
@@ -111,6 +114,7 @@ entities:
           required:
             - deployment_id
             - update_strategy
+            - hpa
             - replicas
             - maxunavailable
             - kubernetes_id
@@ -139,6 +143,9 @@ entities:
               title: Стратегия обновления
               type: string
               enum: [RollingUpdate, OnDelete]
+            hpa:
+              title: HPA\VPA для statefulset включён
+              type: boolean
             replicas:
               title: Количество реплик
               type: integer
@@ -166,6 +173,7 @@ entities:
           required:
             - statefulset_id
             - update_strategy
+            - hpa
             - replicas
             - maxunavailable
             - kubernetes_id
