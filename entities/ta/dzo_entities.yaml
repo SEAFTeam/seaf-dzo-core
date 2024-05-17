@@ -109,8 +109,10 @@ entities:
               items:
                 $ref: "#/$rels/seaf.ta.components.k8s_container.k8s_container"
             availabilityzone_id:
-              title: В какие зоны доступности входит DC
-              $ref: "#/$rels/seaf.ta.services.dc_az.dc_az"
+              title: В какие зоны развёрнут Deployment
+              type: array
+              items:
+                $ref: "#/$rels/seaf.ta.services.dc_az.dc_az"
           required:
             - deployment_id
             - update_strategy
@@ -168,8 +170,10 @@ entities:
               items:
                 $ref: "#/$rels/seaf.ta.components.k8s_container.k8s_container"
             availabilityzone_id:
-              title: В какие зоны доступности входит DC
-              $ref: "#/$rels/seaf.ta.services.dc_az.dc_az"
+              title: В какие зоны развёрнут Deployment
+              type: array
+              items:
+                $ref: "#/$rels/seaf.ta.services.dc_az.dc_az"
           required:
             - statefulset_id
             - update_strategy
