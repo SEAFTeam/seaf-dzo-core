@@ -7,10 +7,16 @@ rules:
       correction: >
     #todo дописать
       title: TACAP_2-Ч07.ОКБ-5.3-03
+      origin:
+        main: "($)"
+        app_tree: seaf.ta.app_tree
       source: >
         (
-          $metal := $."seaf.ta.components.network";
+          $CONTEXT := $;  
+          $metal := $CONTEXT.main."seaf.ta.components.network";
+          
           [$metal.$spread().(
+            $criticality := $eval($CONTEXT.main.functions."seaf.ta".find_criticality, [{"v":$keys(),"c":$CONTEXT.app_tree}, $]);
             $auth_type := $[$not($exists(*.auth_type)) or *.auth_type = 'Отсутствует'].$keys();
             $auth_type.{
               "uid": "sber.standards.v3.p6." & $self.uid & "." & "\"" & $ & "\"",
@@ -18,5 +24,5 @@ rules:
               "correction": $self.correction,
               "description": $self.description & $
             };       
-          )]
+          )];
         )
