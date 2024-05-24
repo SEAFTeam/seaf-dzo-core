@@ -1,3 +1,2 @@
 imports:
-  - seaf_app_services.yaml
   - seaf_ta_app_tree.yaml
