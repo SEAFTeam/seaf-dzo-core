@@ -20,4 +20,5 @@ docs:
     source: docs/SEAF_TA_Roadmap_2024Q1.mmd
 imports:
   - entities/root.yaml
+  - datasets/root.yaml
   - docs/root.yaml
