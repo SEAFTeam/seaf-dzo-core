@@ -11,7 +11,7 @@ $package:
     version: 1.2.14
     # Зависимости от других пакетов
     dependencies:
-      seaf-core: ">=1.2.6"
+      seaf-core: ">=1.2.8"
 docs:
   dochub.welcome.ta_timeline2024Q1:
     title: SEAF TA Roadmap 2024Q1
