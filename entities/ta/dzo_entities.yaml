@@ -84,6 +84,9 @@ entities:
               title: Стратегия обновления
               type: string
               enum: [RollingUpdate, Recreate]
+            hpa:
+              title: HPA\VPA для деплоймента включён
+              type: boolean
             replicas:
               title: Количество реплик
               type: integer
@@ -97,20 +100,16 @@ entities:
                 $ref: "#/$rels/seaf.ta.services.k8s.k8s"
             k8s_pod:
               title: Pod IDs
-              type: array
-              items:
-                $ref: "#/$rels/seaf.ta.components.k8s_pod.k8s_pod"
-            container_id:
-              title: Какие контейнеры включает
-              type: array
-              items:
-                $ref: "#/$rels/seaf.ta.components.k8s_container.k8s_container"
+              $ref: "#/$rels/seaf.ta.components.k8s_pod.k8s_pod"
             availabilityzone_id:
-              title: В какие зоны доступности входит DC
-              $ref: "#/$rels/seaf.ta.services.dc_az.dc_az"
+              title: В какие зоны развёрнут Deployment
+              type: array
+              items:
+                $ref: "#/$rels/seaf.ta.services.dc_az.dc_az"
           required:
             - deployment_id
             - update_strategy
+            - hpa
             - replicas
             - maxunavailable
             - kubernetes_id
@@ -139,6 +138,9 @@ entities:
               title: Стратегия обновления
               type: string
               enum: [RollingUpdate, OnDelete]
+            hpa:
+              title: HPA\VPA для statefulset включён
+              type: boolean
             replicas:
               title: Количество реплик
               type: integer
@@ -156,16 +158,17 @@ entities:
               items:
                 $ref: "#/$rels/seaf.ta.components.k8s_pod.k8s_pod"
             container_id:
-              title: Какие контейнеры включает
+              title: Какой контейнер включает
+              $ref: "#/$rels/seaf.ta.components.k8s_container.k8s_container"
+            availabilityzone_id:
+              title: В какие зоны развёрнут Deployment
               type: array
               items:
-                $ref: "#/$rels/seaf.ta.components.k8s_container.k8s_container"
-            availabilityzone_id:
-              title: В какие зоны доступности входит DC
-              $ref: "#/$rels/seaf.ta.services.dc_az.dc_az"
+                $ref: "#/$rels/seaf.ta.services.dc_az.dc_az"
           required:
             - statefulset_id
             - update_strategy
+            - hpa
             - replicas
             - maxunavailable
             - kubernetes_id
