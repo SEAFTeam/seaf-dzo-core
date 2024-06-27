@@ -387,10 +387,9 @@ entities:
             - raid_spare_disks
             - rack_mount
       patternProperties:
-        "^[a-zA-Z0-9_\\.]*$":
+        "^[a-zA-Z0-9_-]*(\\.[a-zA-Z0-9_-]*)*$":
           type: object
           properties:
-            type: object
             sber:
               $ref: "#/$defs/seaf.ta.components.server_dzo"
 
