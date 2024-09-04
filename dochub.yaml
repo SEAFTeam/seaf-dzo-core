@@ -21,4 +21,3 @@ docs:
 imports:
   - entities/root.yaml
   - datasets/root.yaml
-  - docs/root.yaml
