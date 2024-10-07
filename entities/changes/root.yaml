@@ -1,0 +1,3 @@
+imports:
+  - presentation/standarts_table.yaml
+  - requirements.yaml
