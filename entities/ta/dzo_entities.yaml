@@ -913,3 +913,40 @@ entities:
             - class
             - location
             - status
+
+  seaf.ta.components.network_segment:
+    schema:
+      $defs:
+        seaf.ta.components.network_segment_dzo:
+          title: Расширение описания Network Segment для Р41
+          type: object
+          properties:
+            networks:
+              title: Перечисление связанных сетей
+              type: string
+              $ref: "#/$rels/seaf.ta.services.network.network"
+            zone:
+              title: Сетевая зона
+              enum:
+                - EXTERNAL-NET
+                - INTERNET
+                - TRANSPORT-WAN
+                - INET-EDGE
+                - EXT-WAN-EDGE
+                - INT-WAN-EDGE
+                - DMZ
+                - INT-NET
+                - INT-SECURITY-NET
+            dc:
+              title: Имя ЦОД/Серверной комнаты
+              $ref: "#/$rels/seaf.ta.services.dc.dc"
+            office:
+              title: Офис
+              $ref: "#/$rels/seaf.ta.services.office.office"
+      patternProperties:
+        "^[a-zA-Z0-9_\\.]*$":
+          type: object
+          properties:
+            type: object
+            sber:
+              $ref: "#/$defs/seaf.ta.components.network_segment_dzo"
