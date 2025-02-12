@@ -574,10 +574,26 @@ entities:
                 - Используется
                 - Выводится
                 - В архиве
+            device_type:
+              title: Тип сетевого устройства
+              enum:
+                - Маршрутизатор (роутер)
+                - Коммутатор (свитч)
+                - Точка доступа (Wi-Fi)
+                - Межсетевой экран (файрвол)
+                - Web Application Firewall
+                - Сетевой концентратор (хаб)
+                - Повторитель (репитер)
+                - Балансировщик нагрузки (Load Balancer)
+                - Анализатор трафика (сетевой анализатор)
+                - VoIP-шлюз
             auth_type:
               title: Тип аутентификации
-              type: string
-              enum: [Отсутствует, Пароль и логин, Сертификат, Двухфакторная]
+              enum:
+              - Отсутствует
+              - Пароль и логин
+              - Сертификат
+              - Двухфакторная
       patternProperties:
         "^[a-zA-Z0-9_\\.]*$":
           type: object
@@ -921,10 +937,6 @@ entities:
           title: Расширение описания Network Segment для Р41
           type: object
           properties:
-            networks:
-              title: Перечисление связанных сетей
-              type: string
-              $ref: "#/$rels/seaf.ta.services.network.network"
             zone:
               title: Сетевая зона
               enum:
