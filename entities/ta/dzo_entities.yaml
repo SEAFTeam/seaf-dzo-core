@@ -914,10 +914,10 @@ entities:
             - location
             - status
 
-  seaf.ta.components.network_segment:
+  seaf.ta.services.network_segment:
     schema:
       $defs:
-        seaf.ta.components.network_segment_dzo:
+        seaf.ta.services.network_segment_dzo:
           title: Расширение описания Network Segment для Р41
           type: object
           properties:
@@ -949,4 +949,4 @@ entities:
           properties:
             type: object
             sber:
-              $ref: "#/$defs/seaf.ta.components.network_segment_dzo"
+              $ref: "#/$defs/seaf.ta.services.network_segment_dzo"
