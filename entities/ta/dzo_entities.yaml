@@ -60,7 +60,6 @@ entities:
         "^[a-zA-Z0-9_\\.]*$":
           type: object
           properties:
-            type: object
             sber:
               $ref: "#/$defs/seaf.ta.services.k8s_dzo"
 
@@ -470,7 +469,6 @@ entities:
         "^[a-zA-Z0-9_\\.]*$":
           type: object
           properties:
-            type: object
             sber:
               $ref: "#/$defs/seaf.ta.components.hw_storage_dzo"
 
@@ -543,7 +541,6 @@ entities:
         "^[a-zA-Z0-9_\\.]*$":
           type: object
           properties:
-            type: object
             sber:
               $ref: "#/$defs/seaf.ta.services.monitoring_dzo"
 
@@ -574,15 +571,30 @@ entities:
                 - Используется
                 - Выводится
                 - В архиве
+            device_type:
+              title: Тип сетевого устройства
+              enum:
+                - Маршрутизатор (роутер)
+                - Коммутатор (свитч)
+                - Точка доступа (Wi-Fi)
+                - Межсетевой экран (файрвол)
+                - Web Application Firewall
+                - Сетевой концентратор (хаб)
+                - Повторитель (репитер)
+                - Балансировщик нагрузки (Load Balancer)
+                - Анализатор трафика (сетевой анализатор)
+                - VoIP-шлюз
             auth_type:
               title: Тип аутентификации
-              type: string
-              enum: [Отсутствует, Пароль и логин, Сертификат, Двухфакторная]
+              enum:
+              - Отсутствует
+              - Пароль и логин
+              - Сертификат
+              - Двухфакторная
       patternProperties:
         "^[a-zA-Z0-9_\\.]*$":
           type: object
           properties:
-            type: object
             sber:
               $ref: "#/$defs/seaf.ta.components.network_dzo"
 
@@ -646,7 +658,6 @@ entities:
         "^[a-zA-Z0-9_\\.]*$":
           type: object
           properties:
-            type: object
             sber:
               $ref: "#/$defs/seaf.ta.services.cluster_dzo"
 
@@ -705,7 +716,6 @@ entities:
         "^[a-zA-Z0-9_\\.]*$":
           type: object
           properties:
-            type: object
             sber:
                $ref: "#/$defs/seaf.ta.services.compute_service_dzo"
 
@@ -736,7 +746,6 @@ entities:
         "^[a-zA-Z0-9_\\.]*$":
           type: object
           properties:
-            type: object
             sber:
               $ref: "#/$defs/seaf.ta.services.backup_dzo"
 
@@ -767,7 +776,6 @@ entities:
         "^[a-zA-Z0-9_\\.]*$":
           type: object
           properties:
-            type: object
             sber:
               $ref: "#/$defs/seaf.ta.services.cluster_virtualization_dzo"
 
@@ -801,7 +809,6 @@ entities:
         "^[a-zA-Z0-9_\\.]*$":
           type: object
           properties:
-            type: object
             sber:
               $ref: "#/$defs/seaf.ta.services.storage_dzo"
 
@@ -832,7 +839,6 @@ entities:
         "^[a-zA-Z0-9_\\.]*$":
           type: object
           properties:
-            type: object
             sber:
               $ref: "#/$defs/seaf.ta.services.dc_dzo"
 
@@ -863,7 +869,6 @@ entities:
         "^[a-zA-Z0-9_\\.]*$":
           type: object
           properties:
-            type: object
             sber:
               $ref: "#/$defs/seaf.ta.services.dc_dzo"
 
@@ -914,17 +919,13 @@ entities:
             - location
             - status
 
-  seaf.ta.components.network_segment:
+  seaf.ta.services.network_segment:
     schema:
       $defs:
-        seaf.ta.components.network_segment_dzo:
+        seaf.ta.services.network_segment_dzo:
           title: Расширение описания Network Segment для Р41
           type: object
           properties:
-            networks:
-              title: Перечисление связанных сетей
-              type: string
-              $ref: "#/$rels/seaf.ta.services.network.network"
             zone:
               title: Сетевая зона
               enum:
@@ -947,6 +948,5 @@ entities:
         "^[a-zA-Z0-9_\\.]*$":
           type: object
           properties:
-            type: object
             sber:
-              $ref: "#/$defs/seaf.ta.components.network_segment_dzo"
+              $ref: "#/$defs/seaf.ta.services.network_segment_dzo"
