@@ -926,6 +926,13 @@ entities:
           title: Расширение описания Network Segment для Р41
           type: object
           properties:
+            location:
+              title: ID ЦОД или Офиса
+              type: string
+              items:
+                anyOf:
+                  - $ref: "#/$rels/seaf.ta.services.dc.dc"
+                  - $ref: "#/$rels/seaf.ta.services.office.office"
             zone:
               title: Сетевая зона
               enum:
@@ -938,12 +945,6 @@ entities:
                 - DMZ
                 - INT-NET
                 - INT-SECURITY-NET
-            dc:
-              title: Имя ЦОД/Серверной комнаты
-              $ref: "#/$rels/seaf.ta.services.dc.dc"
-            office:
-              title: Офис
-              $ref: "#/$rels/seaf.ta.services.office.office"
       patternProperties:
         "^[a-zA-Z0-9_\\.]*$":
           type: object
