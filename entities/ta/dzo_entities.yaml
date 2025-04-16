@@ -860,41 +860,170 @@ entities:
       type: object
       patternProperties:
         "^[a-zA-Z0-9_\\.]*$":
-          type: object
           $ref: "#/$defs/seaf.ta.services.base.entity"
           properties:
-            class:
-              title: Класс
-              enum:
-                - ИБ-Антивирусное ПО
-                - ИБ-Аудит действий персонала
-                - ИБ-Аутентификация пользователей
-                - ИБ-Биометрия
-                - ИБ-Защита от киберугроз
-                - ИБ-Защита от сетевых атак
-                - ИБ-Защита от утечек информации
-                - ИБ-Защита трафика
-                - ИБ-Криптография и шифрование
-                - ИБ-Предотвращение мошенничества
-                - ИБ-Управление доступом
-                - ИБ-Управление сертификатами
-                - ИБ-Управление событиями инф.безопасности
-                - Иное
-            location:
-              title: Размещение
-              enum:
-                - Внутренняя
-                - Внешняя
+            service_class:
+              title: Сервис ИБ из КА ДЗО
+              oneOf:
+                - type: object
+                  title: ИБ-Антивирусное ПО
+                  properties:
+                    technology:
+                      type: string
+                      enum: [ Потоковый антивирус ]
+                    software_name:
+                      type: string
+                    label:
+                      type: string
+                      enum: [ AV ]
+                - type: object
+                  title: ИБ-Аудит действий персонала
+                  properties:
+                    technology:
+                      type: string
+                      enum: [ Мониторинг действий пользователей ]
+                    software_name:
+                      type: string
+                    label:
+                      type: string
+                      enum: [ UAM ]
+                - type: object
+                  title: ИБ-Защита от киберугроз
+                  properties:
+                    technology:
+                      type: string
+                      enum: [ Динамический анализ угроз Sandbox, Инструментальный контроль защищенности ]
+                    software_name:
+                      type: string
+                    label:
+                      type: string
+                      enum: [ Sandbox, SCAN ]
+                - type: object
+                  title: ИБ-Защита от киберугроз
+                  properties:
+                    technology:
+                      type: string
+                      enum: [ Динамический анализ угроз Sandbox, Инструментальный контроль защищенности ]
+                    software_name:
+                      type: string
+                    label:
+                      type: string
+                      enum: [ Sandbox, SCAN ]
+                - type: object
+                  title: ИБ-Аутентификация пользователей
+                  properties:
+                    technology:
+                      type: string
+                      enum: [ Механизмы AAA ]
+                    software_name:
+                      type: string
+                    label:
+                      type: string
+                      enum: [ AAA ]
+                - type: object
+                  title: ИБ-Управление доступом
+                  properties:
+                    technology:
+                      type: string
+                      enum: [ Межсетевое экранирование, Управление доступом пользователей, Контроль подключений к сети, Контентная фильтрация и разграничение доступа в Интернет ]
+                    software_name:
+                      type: string
+                    label:
+                      type: string
+                      enum: [ FW, IdFW, NAC, Proxy ]
+                - type: object
+                  title: ИБ-Защита трафика
+                  properties:
+                    technology:
+                      type: string
+                      enum: [ Сигнатурный анализ режим обнаружнения вторжений, Сигнатурный анализ режим предотвращения вторжений, Поведенческий анализ сетевого траффика ]
+                    software_name:
+                      type: string
+                    label:
+                      type: string
+                      enum: [ IDS, IPS, NBA ]
+                - type: object
+                  title: ИБ-Защита от сетевых атак
+                  properties:
+                    technology:
+                      type: string
+                      enum: [ Защита от отак типа "Отказ от обслуживания", Защита веб-приложений WAF, Шлюзы безопасности прикладного уровня ]
+                    software_name:
+                      type: string
+                    label:
+                      type: string
+                      enum: [ DDoS, WAF, ALG ]
+                - type: object
+                  title: ИБ-Защита от утечек информации
+                  properties:
+                    technology:
+                      type: string
+                      enum: [ Защшита от утечек информации ]
+                    software_name:
+                      type: string
+                    label:
+                      type: string
+                      enum: [ DLP ]
+                - type: object
+                  title: ИБ-Управление событиями инф.безопасности
+                  properties:
+                    technology:
+                      type: string
+                      enum: [ Аудит событий КБ ]
+                    software_name:
+                      type: string
+                    label:
+                      type: string
+                      enum: [ Log ]
+                - type: object
+                  title: ИБ-Управление оборудованием
+                  properties:
+                    technology:
+                      type: string
+                      enum: [ Безопасность конфигураций ]
+                    software_name:
+                      type: string
+                    label:
+                      type: string
+                      enum: [ CS ]
+                - type: object
+                  title: ИБ-Управление сертификатами
+                  properties:
+                    technology:
+                      type: string
+                      enum: [ Центр управления сертификатами ИБ ]
+                    software_name:
+                      type: string
+                    label:
+                      type: string
+                      enum: [ CMC ]
+                - type: object
+                  title: ИБ-Предотвращение мошенничества
+                  properties:
+                    technology:
+                      type: string
+                      enum: [ Зашита от мошеннических операций ]
+                    software_name:
+                      type: string
+                    label:
+                      type: string
+                      enum: [ AntiFraud ]
             status:
               title: Статус
+              type: string
               enum:
                 - Создается
                 - Используется
                 - Выводится
                 - В архиве
+            network_connection:
+              title: Перечисление связанных сетей
+              type: array
+              items:
+                $ref: "#/$rels/seaf.ta.services.network.network"
           required:
-            - class
-            - location
+            - service_class
+            - network_connection
             - status
 
   seaf.ta.services.network_segment:
