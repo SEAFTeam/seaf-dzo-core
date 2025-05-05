@@ -1035,11 +1035,9 @@ entities:
           properties:
             location:
               title: ID ЦОД или Офиса
-              type: array
-              items:
-                anyOf:
-                  - $ref: "#/$rels/seaf.ta.services.dc.dc"
-                  - $ref: "#/$rels/seaf.ta.services.office.office"
+              anyOf:
+                - $ref: "#/$rels/seaf.ta.services.dc.dc"
+                - $ref: "#/$rels/seaf.ta.services.office.office"
             zone:
               title: Сетевая зона
               enum:
