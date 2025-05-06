@@ -30,7 +30,7 @@ entities:
             pv:
               title: Persistent Volume используются в кластере K8s
               type: boolean
-            virtual_cluster_id:
+            virtual_cluster:
               title: Связь K8s кластера с кластером виртуализации
               type: string
             class:
@@ -60,7 +60,6 @@ entities:
         "^[a-zA-Z0-9_\\.]*$":
           type: object
           properties:
-            type: object
             sber:
               $ref: "#/$defs/seaf.ta.services.k8s_dzo"
 
@@ -77,9 +76,6 @@ entities:
           type: object
           $ref: "#/$defs/seaf.ta.components.base.entity"
           properties:
-            deployment_id:
-              title: K8s Deployment ID
-              type: string
             update_strategy:
               title: Стратегия обновления
               type: string
@@ -93,7 +89,7 @@ entities:
             maxunavailable:
               title: Какое минимальное количество экземпляров должно работать во время обновления обслуживающих текущие запросы
               type: integer
-            kubernetes_id:
+            kubernetes:
               title: Kubernetes cluster ID
               type: array
               items:
@@ -101,19 +97,18 @@ entities:
             k8s_pod:
               title: Pod IDs
               $ref: "#/$rels/seaf.ta.components.k8s_pod.k8s_pod"
-            availabilityzone_id:
+            availabilityzone:
               title: В какие зоны развёрнут Deployment
               type: array
               items:
                 $ref: "#/$rels/seaf.ta.services.dc_az.dc_az"
           required:
-            - deployment_id
             - update_strategy
             - hpa
             - replicas
             - maxunavailable
-            - kubernetes_id
-            - availabilityzone_id
+            - kubernetes
+            - availabilityzone
 
   seaf.ta.components.k8s_statefulset:
     title: K8s StatefulSet
@@ -128,9 +123,6 @@ entities:
           type: object
           $ref: "#/$defs/seaf.ta.components.base.entity"
           properties:
-            statefulset_id:
-              title: K8s StatefulSet ID
-              type: string
             name:
               title: Имя StatefulSet
               type: string
@@ -147,7 +139,7 @@ entities:
             maxunavailable:
               title: Какое минимальное количество экземпляров должно работать во время обновления обслуживающих текущие запросы
               type: integer
-            kubernetes_id:
+            kubernetes:
               title: Kubernetes cluster ID
               type: array
               items:
@@ -157,22 +149,21 @@ entities:
               type: array
               items:
                 $ref: "#/$rels/seaf.ta.components.k8s_pod.k8s_pod"
-            container_id:
+            container:
               title: Какой контейнер включает
               $ref: "#/$rels/seaf.ta.components.k8s_container.k8s_container"
-            availabilityzone_id:
+            availabilityzone:
               title: В какие зоны развёрнут Deployment
               type: array
               items:
                 $ref: "#/$rels/seaf.ta.services.dc_az.dc_az"
           required:
-            - statefulset_id
             - update_strategy
             - hpa
             - replicas
             - maxunavailable
-            - kubernetes_id
-            - availabilityzone_id
+            - kubernetes
+            - availabilityzone
 
   seaf.ta.components.k8s_pod:
     title: POD K8s
@@ -187,9 +178,6 @@ entities:
           type: object
           $ref: "#/$defs/seaf.ta.components.base.entity"
           properties:
-            pod_k8s_id:
-              title: POD K8s ID
-              type: string
             name:
               title: Имя pod
               type: string
@@ -222,13 +210,12 @@ entities:
             ml:
               title: Используется для машинного обучения
               type: boolean
-            container_id:
+            container:
               title: Какие контейнеры включает
               type: array
               items:
                 $ref: "#/$rels/seaf.ta.components.k8s_container.k8s_container"
           required:
-            - pod_k8s_id
             - update_strategy
             - stoptimeout
             - pv
@@ -251,9 +238,6 @@ entities:
           type: object
           $ref: "#/$defs/seaf.ta.components.base.entity"
           properties:
-            container_id:
-              title: Container K8s ID
-              type: string
             name:
               title: Имя контейнера
               type: string
@@ -301,7 +285,7 @@ entities:
             container_cpu:
               title: Размер CPU, millicore
               type: integer
-            server_id:
+            server:
               title: Список серверов на которых запущен контейнер
               type: array
               items:
@@ -311,8 +295,6 @@ entities:
               type: array
               items:
                 $ref: "#/$rels/seaf.ta.components.k8s_image.k8s_image"
-          required:
-            - container_id
 
   seaf.ta.components.k8s_image:
     title: Image ПО для развёртывания в K8s
@@ -327,9 +309,6 @@ entities:
           type: object
           $ref: "#/$defs/seaf.ta.components.base.entity"
           properties:
-            image_id:
-              title: Image K8s ID
-              type: string
             name:
               title: Имя образа
               type: string
@@ -346,7 +325,6 @@ entities:
               title: Описание использования
               type: string
           required:
-            - image_id
             - name
             - repo_path
             - repo_proved
@@ -387,10 +365,9 @@ entities:
             - raid_spare_disks
             - rack_mount
       patternProperties:
-        "^[a-zA-Z0-9_\\.]*$":
+        "^[a-zA-Z0-9_-]*(\\.[a-zA-Z0-9_-]*)*$":
           type: object
           properties:
-            type: object
             sber:
               $ref: "#/$defs/seaf.ta.components.server_dzo"
 
@@ -471,7 +448,6 @@ entities:
         "^[a-zA-Z0-9_\\.]*$":
           type: object
           properties:
-            type: object
             sber:
               $ref: "#/$defs/seaf.ta.components.hw_storage_dzo"
 
@@ -487,7 +463,7 @@ entities:
               title: Адрес веб-консоли системы мониторинга
               type: string
             #Часть 6. TACMN_1-Ч06.01.7-02.
-            cluster_id:
+            cluster:
               title: ID кластера мониторинга
               type: string
             #Часть 6. TACMN_1-Ч06.01.5-02.
@@ -533,7 +509,6 @@ entities:
                 - В архиве
           required:
             - monitoring_console
-            - cluster_id
             - alarm_transport
             - sber_radar
             - history
@@ -544,7 +519,6 @@ entities:
         "^[a-zA-Z0-9_\\.]*$":
           type: object
           properties:
-            type: object
             sber:
               $ref: "#/$defs/seaf.ta.services.monitoring_dzo"
 
@@ -575,15 +549,30 @@ entities:
                 - Используется
                 - Выводится
                 - В архиве
+            device_type:
+              title: Тип сетевого устройства
+              enum:
+                - Маршрутизатор (роутер)
+                - Коммутатор (свитч)
+                - Точка доступа (Wi-Fi)
+                - Межсетевой экран (файрвол)
+                - Web Application Firewall
+                - Сетевой концентратор (хаб)
+                - Повторитель (репитер)
+                - Балансировщик нагрузки (Load Balancer)
+                - Анализатор трафика (сетевой анализатор)
+                - VoIP-шлюз
             auth_type:
               title: Тип аутентификации
-              type: string
-              enum: [Отсутствует, Пароль и логин, Сертификат, Двухфакторная]
+              enum:
+              - Отсутствует
+              - Пароль и логин
+              - Сертификат
+              - Двухфакторная
       patternProperties:
         "^[a-zA-Z0-9_\\.]*$":
           type: object
           properties:
-            type: object
             sber:
               $ref: "#/$defs/seaf.ta.components.network_dzo"
 
@@ -647,7 +636,6 @@ entities:
         "^[a-zA-Z0-9_\\.]*$":
           type: object
           properties:
-            type: object
             sber:
               $ref: "#/$defs/seaf.ta.services.cluster_dzo"
 
@@ -706,7 +694,6 @@ entities:
         "^[a-zA-Z0-9_\\.]*$":
           type: object
           properties:
-            type: object
             sber:
                $ref: "#/$defs/seaf.ta.services.compute_service_dzo"
 
@@ -737,7 +724,6 @@ entities:
         "^[a-zA-Z0-9_\\.]*$":
           type: object
           properties:
-            type: object
             sber:
               $ref: "#/$defs/seaf.ta.services.backup_dzo"
 
@@ -768,7 +754,6 @@ entities:
         "^[a-zA-Z0-9_\\.]*$":
           type: object
           properties:
-            type: object
             sber:
               $ref: "#/$defs/seaf.ta.services.cluster_virtualization_dzo"
 
@@ -802,7 +787,6 @@ entities:
         "^[a-zA-Z0-9_\\.]*$":
           type: object
           properties:
-            type: object
             sber:
               $ref: "#/$defs/seaf.ta.services.storage_dzo"
 
@@ -833,7 +817,6 @@ entities:
         "^[a-zA-Z0-9_\\.]*$":
           type: object
           properties:
-            type: object
             sber:
               $ref: "#/$defs/seaf.ta.services.dc_dzo"
 
@@ -864,7 +847,6 @@ entities:
         "^[a-zA-Z0-9_\\.]*$":
           type: object
           properties:
-            type: object
             sber:
               $ref: "#/$defs/seaf.ta.services.dc_dzo"
 
@@ -878,39 +860,199 @@ entities:
       type: object
       patternProperties:
         "^[a-zA-Z0-9_\\.]*$":
-          type: object
           $ref: "#/$defs/seaf.ta.services.base.entity"
           properties:
-            class:
-              title: Класс
-              enum:
-                - ИБ-Антивирусное ПО
-                - ИБ-Аудит действий персонала
-                - ИБ-Аутентификация пользователей
-                - ИБ-Биометрия
-                - ИБ-Защита от киберугроз
-                - ИБ-Защита от сетевых атак
-                - ИБ-Защита от утечек информации
-                - ИБ-Защита трафика
-                - ИБ-Криптография и шифрование
-                - ИБ-Предотвращение мошенничества
-                - ИБ-Управление доступом
-                - ИБ-Управление сертификатами
-                - ИБ-Управление событиями инф.безопасности
-                - Иное
-            location:
-              title: Размещение
-              enum:
-                - Внутренняя
-                - Внешняя
+            service_class:
+              title: Сервис ИБ из КА ДЗО
+              oneOf:
+                - type: object
+                  title: ИБ-Антивирусное ПО
+                  properties:
+                    technology:
+                      type: string
+                      enum: [ Потоковый антивирус ]
+                    software_name:
+                      type: string
+                    label:
+                      type: string
+                      enum: [ AV ]
+                - type: object
+                  title: ИБ-Аудит действий персонала
+                  properties:
+                    technology:
+                      type: string
+                      enum: [ Мониторинг действий пользователей ]
+                    software_name:
+                      type: string
+                    label:
+                      type: string
+                      enum: [ UAM ]
+                - type: object
+                  title: ИБ-Защита от киберугроз
+                  properties:
+                    technology:
+                      type: string
+                      enum: [ Динамический анализ угроз Sandbox, Инструментальный контроль защищенности ]
+                    software_name:
+                      type: string
+                    label:
+                      type: string
+                      enum: [ Sandbox, SCAN ]
+                - type: object
+                  title: ИБ-Защита от киберугроз
+                  properties:
+                    technology:
+                      type: string
+                      enum: [ Динамический анализ угроз Sandbox, Инструментальный контроль защищенности ]
+                    software_name:
+                      type: string
+                    label:
+                      type: string
+                      enum: [ Sandbox, SCAN ]
+                - type: object
+                  title: ИБ-Аутентификация пользователей
+                  properties:
+                    technology:
+                      type: string
+                      enum: [ Механизмы AAA ]
+                    software_name:
+                      type: string
+                    label:
+                      type: string
+                      enum: [ AAA ]
+                - type: object
+                  title: ИБ-Управление доступом
+                  properties:
+                    technology:
+                      type: string
+                      enum: [ Межсетевое экранирование, Управление доступом пользователей, Контроль подключений к сети, Контентная фильтрация и разграничение доступа в Интернет ]
+                    software_name:
+                      type: string
+                    label:
+                      type: string
+                      enum: [ FW, IdFW, NAC, Proxy ]
+                - type: object
+                  title: ИБ-Защита трафика
+                  properties:
+                    technology:
+                      type: string
+                      enum: [ Сигнатурный анализ режим обнаружнения вторжений, Сигнатурный анализ режим предотвращения вторжений, Поведенческий анализ сетевого траффика ]
+                    software_name:
+                      type: string
+                    label:
+                      type: string
+                      enum: [ IDS, IPS, NBA ]
+                - type: object
+                  title: ИБ-Защита от сетевых атак
+                  properties:
+                    technology:
+                      type: string
+                      enum: [ Защита от отак типа "Отказ от обслуживания", Защита веб-приложений WAF, Шлюзы безопасности прикладного уровня ]
+                    software_name:
+                      type: string
+                    label:
+                      type: string
+                      enum: [ DDoS, WAF, ALG ]
+                - type: object
+                  title: ИБ-Защита от утечек информации
+                  properties:
+                    technology:
+                      type: string
+                      enum: [ Защшита от утечек информации ]
+                    software_name:
+                      type: string
+                    label:
+                      type: string
+                      enum: [ DLP ]
+                - type: object
+                  title: ИБ-Управление событиями инф.безопасности
+                  properties:
+                    technology:
+                      type: string
+                      enum: [ Аудит событий КБ ]
+                    software_name:
+                      type: string
+                    label:
+                      type: string
+                      enum: [ Log ]
+                - type: object
+                  title: ИБ-Управление оборудованием
+                  properties:
+                    technology:
+                      type: string
+                      enum: [ Безопасность конфигураций ]
+                    software_name:
+                      type: string
+                    label:
+                      type: string
+                      enum: [ CS ]
+                - type: object
+                  title: ИБ-Управление сертификатами
+                  properties:
+                    technology:
+                      type: string
+                      enum: [ Центр управления сертификатами ИБ ]
+                    software_name:
+                      type: string
+                    label:
+                      type: string
+                      enum: [ CMC ]
+                - type: object
+                  title: ИБ-Предотвращение мошенничества
+                  properties:
+                    technology:
+                      type: string
+                      enum: [ Зашита от мошеннических операций ]
+                    software_name:
+                      type: string
+                    label:
+                      type: string
+                      enum: [ AntiFraud ]
             status:
               title: Статус
+              type: string
               enum:
                 - Создается
                 - Используется
                 - Выводится
                 - В архиве
+            network_connection:
+              title: Перечисление связанных сетей
+              type: array
+              items:
+                $ref: "#/$rels/seaf.ta.services.network.network"
           required:
-            - class
-            - location
+            - service_class
+            - network_connection
             - status
+
+  seaf.ta.services.network_segment:
+    schema:
+      $defs:
+        seaf.ta.services.network_segment_dzo:
+          title: Расширение описания Network Segment для Р41
+          type: object
+          properties:
+            location:
+              title: ID ЦОД или Офиса
+              anyOf:
+                - $ref: "#/$rels/seaf.ta.services.dc.dc"
+                - $ref: "#/$rels/seaf.ta.services.office.office"
+            zone:
+              title: Сетевая зона
+              enum:
+                - EXTERNAL-NET
+                - INTERNET
+                - TRANSPORT-WAN
+                - INET-EDGE
+                - EXT-WAN-EDGE
+                - INT-WAN-EDGE
+                - DMZ
+                - INT-NET
+                - INT-SECURITY-NET
+      patternProperties:
+        "^[a-zA-Z0-9_\\.]*$":
+          type: object
+          properties:
+            sber:
+              $ref: "#/$defs/seaf.ta.services.network_segment_dzo"
