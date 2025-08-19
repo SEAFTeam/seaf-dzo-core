@@ -1,0 +1,62 @@
+# Презентация компонентов в табличном виде
+docs:
+  change_standarts_tables:
+    location: /Изменения/Требования/Стандарты Группы Сбер
+    source: templates/standarts.md
+    type: markdown
+
+  seaf.change.requirements_standarts:
+    type: table
+    headers:
+      - value: statement
+        text: Формулировка (содержание) требования
+        sortable: true
+        align: left
+        width: 20%
+        link: link
+
+      - value: exceptions_acceptance_level
+        text: Уровень согласования отклонений
+        sortable: true
+        align: left
+        width: 20%
+
+      - value: id_sib
+        text: Идентификатор требования SIB
+        sortable: true
+        align: left
+        width: 20%
+
+      - value: standard_version
+        text: Версия стандарта в соответствии с подходом Сбер
+        sortable: true
+        align: left
+        width: 20%
+        link: dc_link
+
+      - value: applicability_level
+        text: Класс критичности объекта, к которому применяется требование
+        sortable: true
+        align: left
+        width: 20%
+
+      - value: obj_und_ctrl
+        text: Cписок объектов из справочника объектов архитектурного контроля
+        sortable: true
+        align: left
+        width: 20%
+
+    source: >
+      (
+        [[$."seaf.change.requirements".$spread().(
+          $COMPONENT_ID := $keys()[0];
+           $.*.{
+          "statement": statement,
+          "exceptions_acceptance_level": exceptions_acceptance_level,          
+          "id_sib": sber.id_sib,
+          "standard_version": sber.standard_version,
+          "applicability_level": sber.applicability_level,          
+          "obj_und_ctrl": sber.obj_und_ctrl
+            }
+        )]^(id_sib)]
+      )
