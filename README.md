@@ -1,3 +1,4 @@
+# [INACTIVE]
 # SEAF.DZO
 Архитектурный фреймворк ДЗО Группы Сбер, базирующийся на [SEAF (Sber Enterprise Architect Framefork)](https://github.com/SEAFTeam/seaf-core).
 
@@ -43,3 +44,4 @@ sber.rabotaru.component.media_platform
 ## Лицензия
 
 Распространяется под лицензией Apache License 2.0 Open source license.
+
